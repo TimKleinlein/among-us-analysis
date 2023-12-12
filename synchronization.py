@@ -5,15 +5,16 @@ import os
 import pysrt
 from pysrt import SubRipTime
 
+print("SESSION: 2022-01-26_S1")
+
 delete_streamer = True
 delete_streamer_list = []
 while delete_streamer:
-    print(delete_streamer_list)
 
     # CREATE DF WITH METADATA
     con = sqlite3.connect("vods.db")
     cur = con.cursor()
-    g = '2022-03-01_S1'
+    g = '2022-01-26_S1'
     res = cur.execute("SELECT v.id, m.path, v.published_at, v.start, v.end, m.duration "
                       "FROM metadata m  JOIN vods v ON m.vod_id = v.id  "
                       "WHERE `group` = ?", (g,))
@@ -43,7 +44,7 @@ while delete_streamer:
     df['path'] = df['path'].apply(lambda x: x[39:-4])
 
     # EXTRACT EVENT DATA FROM SRT FILES
-    srt_path = 'srt/2022-03-01_S1'
+    srt_path = 'srt/2022-01-26_S1'
     for name in delete_streamer_list:
         if os.path.exists(f'{srt_path}/{name}.srt'):
             os.remove(f'{srt_path}/{name}.srt')
@@ -142,23 +143,20 @@ while delete_streamer:
     # now assign lobby times with None to lobbies
     for lob in sorted_all_lobbies_list:
         if lob[0] is None or lob[1] is None:
-            assigned = False
             if lob[0] is None:
                 for i in lobby_dic.keys():
                     if abs(lob[1] - lobby_dic[i]['lobby_end']) < timedelta(minutes=2):
                         lobby_dic[i]['timestamp_list'].append(lob)
                         assigned = True
                         break
-                if not assigned:
-                    print(lob)
+
             elif lob[1] is None:
                 for i in lobby_dic.keys():
                     if abs(lob[0] - lobby_dic[i]['lobby_start']) < timedelta(minutes=2):
                         lobby_dic[i]['timestamp_list'].append(lob)
                         assigned = True
                         break
-                if not assigned:
-                    print(lob)
+
         else:
             continue
 
@@ -435,6 +433,7 @@ for lobby_num in range(1, number_extracted_lobbies):
 
 # EVALUATION OF LOBBY ASSIGNMENTS
 # check for all final lobbies for outliers within the lobbies
+"""
 number_extracted_lobbies = max(df['lobbies_assigned_final'].apply(lambda x: max(x, key=lambda y: float('-inf') if y is None else y)))
 for lobby_num in range(1, number_extracted_lobbies):
 
@@ -467,8 +466,10 @@ for lobby_num in range(1, number_extracted_lobbies):
                     c += 1
         if c >= 2:
             print(f'Lobby number: {lobby_num}, id: {i}, end - {r[i]}')
+"""
 
 # check for all streamers if final lobbies assigned are subsequent numbers
+print("THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:")
 for j in range(len(df)):
     lobbies = df['lobbies_assigned_final'][j]
     for i in range(len(lobbies) - 1):
@@ -478,18 +479,107 @@ for j in range(len(df)):
             print(f'Streamer: {df["path"][j]}: Lobbies numbers not consecutive: {lobbies[i]} and {lobbies[i+1]}')
 
 
-subs = pysrt.open(f"{srt_path}/2022-01-26_S1_cheesybluenips_1276937517.srt")
-for i in subs:
-    print(i.text)
-    print(i.start)
-    print(i.duration)
+#  for all lobbies find trustworthy lobby times
+for key in lobby_dic.keys():
+    lobby_dic[key]['trustworthy_times'] = []
+    first_lobby_times = []  # only consider lobby times which originally created lobby as candidates for trustworthy lobby times
+    for lt in lobby_dic[key]['timestamp_list']:
+        if lt[0] is None or lt[1] is None:
+            break
+        else:
+            first_lobby_times.append(lt)
+    for lt in first_lobby_times:
+        c = 0
+        for olt in first_lobby_times:
+            if abs((lt[1] - lt[0]) - (olt[1] - olt[0])) < timedelta(seconds=5) and abs(lt[1] - olt[1]) < timedelta(seconds=10) and abs(lt[0] - olt[0]) < timedelta(seconds=10):  # compare duration and start / end timestamp with other candidates -> trustworthy if one other candidate has similar values
+                c += 1
+        if c >= 2:
+            lobby_dic[key]['trustworthy_times'].append(lt)
 
 
+# for streamers check which of their lobby times is trustworthy
+trustworthy_streamer_dic = {}
+
+
+def extract_trustworthy_lobby_times(row):
+    streamer = row['path']
+    trustworthy_streamer_dic[streamer] = {}
+    for lobby_index, lobby_time in enumerate(row['lobbies_times_final']):
+        if row['lobbies_assigned_final'][lobby_index] is None:
+            continue
+        elif lobby_time in lobby_dic[row['lobbies_assigned_final'][lobby_index]]['trustworthy_times']:
+            trustworthy_streamer_dic[streamer][row['lobbies_assigned_final'][lobby_index]] = lobby_time
+
+
+df.apply(lambda row: extract_trustworthy_lobby_times(row), axis=1)
+
+"""
+# calculate average streamer differences
+streamer_utc_diff = {}
+streamers = trustworthy_streamer_dic.keys()
+for s1 in streamers:
+    streamer_utc_diff[s1] = {}
+    s1_lobbies = list(trustworthy_streamer_dic[s1].keys())
+    for s2 in streamers:
+        if s1 == s2:
+            continue
+        s2_lobbies = list(trustworthy_streamer_dic[s2].keys())
+        both_streamer_lobbies = list(set(s1_lobbies).intersection(set(s2_lobbies)))
+        if len(both_streamer_lobbies) == 0:
+            streamer_utc_diff[s1][s2] = None
+        else:
+            n = 0
+            abs_difference = timedelta(seconds=0)
+            for l in both_streamer_lobbies:
+                abs_difference += trustworthy_streamer_dic[s1][l][0] - trustworthy_streamer_dic[s2][l][0]
+                abs_difference += trustworthy_streamer_dic[s1][l][1] - trustworthy_streamer_dic[s2][l][1]
+                n += 2
+            streamer_utc_diff[s1][s2] = abs_difference / n
+"""
+
+
+# print lobbies for which i do not have trustworthy times
+print("\n\n\n")
+print("LOBBIES WITHOUT TRUSTWORTHY TIMES:")
+lobbies_wo_trustworthy_times = []
 for i in lobby_dic.keys():
-    print(f'{i}: start: {lobby_dic[i]["lobby_start"]}  end: {lobby_dic[i]["lobby_end"]} amount: {len(lobby_dic[i]["timestamp_list"])}')
+    if len(lobby_dic[i]['trustworthy_times']) == 0:
+        lobbies_wo_trustworthy_times.append(i)
+        print(f'Lobby has no trustworthy times: {i} - Start: {lobby_dic[i]["lobby_start"]} - End: {lobby_dic[i]["lobby_end"]}')
+
+# print streamers for which i do not have trustworthy times
+print("\n\n\n")
+for i in trustworthy_streamer_dic.keys():
+    if len(trustworthy_streamer_dic[i]) == 0:
+        print(f'Streamer has no trustworthy times: {i} - Start time: {df[df["path"]==i]["start_date"]}')
+
+# print streamer who participated in all lobbies
+print("\n\n\n")
+print("STREAMERS WHO PARTICIPATED IN ALL LOBBIES:")
+df['lobbies_participated'] = df['lobbies_assigned_final'].apply(lambda lst: len(lst))
+top_streamer = list(df[df['lobbies_participated'] == max(df['lobbies_participated'])]['path'])
+print(f'Streamers who participated in all lobbies: {top_streamer}')
 
 
-df['lobbies_times'][0]
-df['new'] = df['lobbies_times'].apply(lambda lst: [x for x in lst if x[1] is None or x[0] is None or (x[1] - x[0]) > timedelta(seconds=60)])
-df['lobbies_times'][9]
-df['new'][9]
+# for streamers who participated in all lobbies print lobby times
+print("\n\n\n")
+print("LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:")
+for s in top_streamer:
+    times_critical = []
+    lobbies_not_existing = 0
+    times_all = []
+    for l in lobbies_wo_trustworthy_times:
+       if l in list(df[df['path'] == s]['lobbies_assigned_final'])[0]:
+           ind = list(df[df['path'] == s]['lobbies_assigned_final'])[0].index(l)
+           times_critical.append([l, list(df[df['path'] == s]['lobbies_times_final'])[0][ind]])
+       else:
+           lobbies_not_existing += 1
+
+    for l in list(lobby_dic.keys()):
+        if l in list(df[df['path'] == s]['lobbies_assigned_final'])[0]:
+            ind = list(df[df['path'] == s]['lobbies_assigned_final'])[0].index(l)
+            times_all.append([l, list(df[df['path'] == s]['lobbies_times_final'])[0][ind]])
+
+    print(f'Streamer: {s} -- Nr of critical lobbies not existing:{lobbies_not_existing} -- {times_critical}')
+    print(f'Streamer: {s} -- {times_all}')
+

@@ -1,0 +1,116 @@
+1
+00:06:22,333 --> 00:07:55,000
+Lobby start - start or end is potentially missing
+
+2
+00:14:59,333 --> 00:15:33,333
+Lobby start
+
+3
+00:20:02,666 --> 00:20:11,666
+Lobby end
+
+4
+00:23:24,000 --> 00:26:50,666
+Lobby start - start or end is potentially missing
+
+5
+00:29:36,000 --> 00:30:58,666
+Lobby start
+
+6
+00:33:39,666 --> 00:33:50,000
+Lobby end
+
+7
+00:35:20,000 --> 00:35:26,000
+Lobby start - start or end is potentially missing
+
+8
+00:42:47,666 --> 00:42:48,666
+Lobby start
+
+9
+00:48:14,000 --> 00:48:17,666
+Lobby end
+
+10
+00:49:11,333 --> 00:49:48,666
+Lobby start
+
+11
+00:54:55,000 --> 00:54:56,333
+Lobby end
+
+12
+00:56:22,333 --> 00:56:28,333
+Lobby start
+
+13
+01:00:39,000 --> 01:00:42,000
+Lobby end
+
+14
+01:02:00,333 --> 01:02:06,333
+Lobby start - start or end is potentially missing
+
+15
+01:08:37,000 --> 01:08:38,000
+Lobby start
+
+16
+01:08:45,000 --> 01:08:51,666
+Lobby end
+
+17
+01:10:09,666 --> 01:10:15,666
+Lobby start
+
+18
+01:14:11,333 --> 01:14:15,000
+Lobby end
+
+19
+01:14:30,000 --> 01:15:49,666
+Lobby start
+
+20
+01:23:48,333 --> 01:23:51,000
+Lobby end
+
+21
+01:25:28,666 --> 01:27:10,000
+Lobby start
+
+22
+01:27:35,666 --> 01:27:36,666
+Lobby end
+
+23
+01:28:46,666 --> 01:29:07,666
+Lobby start - start or end is potentially missing
+
+24
+01:31:56,333 --> 01:32:44,000
+Lobby start
+
+25
+01:34:58,333 --> 01:35:00,333
+Lobby end
+
+26
+01:36:23,666 --> 01:37:04,000
+Lobby start - start or end is potentially missing
+
+27
+01:39:31,666 --> 01:39:56,000
+Lobby start - start or end is potentially missing
+
+28
+01:43:19,333 --> 01:43:43,666
+Lobby start
+
+29
+01:46:59,333 --> 01:47:02,666
+Lobby end
+

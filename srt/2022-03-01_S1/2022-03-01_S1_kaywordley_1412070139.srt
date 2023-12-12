@@ -1,0 +1,300 @@
+1
+01:07:09,892 --> 01:07:10,892
+Lobby start - start or end is potentially missing
+
+2
+01:23:58,166 --> 01:23:59,166
+Lobby start - start or end is potentially missing
+
+3
+01:30:25,453 --> 01:30:26,453
+Lobby start - start or end is potentially missing
+
+4
+01:54:50,033 --> 02:00:04,797
+Lobby start - start or end is potentially missing
+
+5
+02:02:23,819 --> 02:06:16,885
+Lobby start
+
+6
+02:06:22,274 --> 02:06:23,274
+Lobby end
+
+7
+02:06:34,937 --> 02:06:37,790
+Lobby start - start or end is potentially missing
+
+8
+02:09:21,820 --> 02:10:10,586
+Lobby start
+
+9
+02:18:32,187 --> 02:18:41,046
+Lobby end
+
+10
+02:18:45,483 --> 02:22:29,057
+Lobby start - start or end is potentially missing
+
+11
+02:29:00,131 --> 02:29:01,131
+Lobby start
+
+12
+02:29:05,202 --> 02:29:05,519
+Lobby end - start or end is potentially missing
+
+13
+02:32:09,186 --> 02:32:13,307
+Lobby end
+
+14
+02:32:20,581 --> 02:34:52,900
+Lobby start
+
+15
+02:46:43,493 --> 02:47:15,175
+Lobby end
+
+16
+02:47:41,134 --> 02:48:53,339
+Lobby start - start or end is potentially missing
+
+17
+02:51:14,881 --> 02:51:15,881
+Lobby start
+
+18
+02:51:19,636 --> 02:51:20,636
+Lobby end - start or end is potentially missing
+
+19
+02:53:24,394 --> 02:53:27,880
+Lobby end
+
+20
+02:54:50,530 --> 02:55:32,972
+Lobby start - start or end is potentially missing
+
+21
+02:59:08,621 --> 02:59:09,621
+Lobby start
+
+22
+02:59:08,938 --> 02:59:11,474
+Lobby end
+
+23
+03:00:30,002 --> 03:00:36,025
+Lobby start - start or end is potentially missing
+
+24
+03:03:45,064 --> 03:04:06,919
+Lobby start
+
+25
+03:07:14,389 --> 03:07:15,657
+Lobby end
+
+26
+03:07:53,011 --> 03:09:29,291
+Lobby start
+
+27
+03:12:41,182 --> 03:12:44,669
+Lobby end
+
+28
+03:12:57,015 --> 03:15:29,651
+Lobby start - start or end is potentially missing
+
+29
+03:19:09,420 --> 03:19:29,374
+Lobby start
+
+30
+03:22:18,142 --> 03:22:20,044
+Lobby end
+
+31
+03:22:36,511 --> 03:26:41,622
+Lobby start
+
+32
+03:26:44,775 --> 03:26:46,994
+Lobby end
+
+33
+03:27:03,778 --> 03:27:04,778
+Lobby start - start or end is potentially missing
+
+34
+03:30:09,029 --> 03:30:10,029
+Lobby start
+
+35
+03:33:28,212 --> 03:33:30,430
+Lobby end
+
+36
+03:34:35,345 --> 03:37:50,107
+Lobby start
+
+37
+03:45:28,948 --> 03:45:36,239
+Lobby end
+
+38
+03:45:59,345 --> 03:46:56,669
+Lobby start - start or end is potentially missing
+
+39
+03:51:13,159 --> 03:52:00,356
+Lobby start - start or end is potentially missing
+
+40
+03:54:58,317 --> 03:54:59,317
+Lobby start
+
+41
+03:57:44,566 --> 03:57:55,010
+Lobby end
+
+42
+03:58:07,056 --> 04:00:35,888
+Lobby start - start or end is potentially missing
+
+43
+04:04:26,101 --> 04:04:27,101
+Lobby start
+
+44
+04:05:07,259 --> 04:05:24,676
+Lobby end
+
+45
+04:05:31,016 --> 04:06:33,712
+Lobby start
+
+46
+04:08:25,190 --> 04:08:28,343
+Lobby end
+
+47
+04:09:13,321 --> 04:09:19,644
+Lobby start - start or end is potentially missing
+
+48
+04:13:51,032 --> 04:13:52,032
+Lobby start
+
+49
+04:15:15,266 --> 04:15:16,851
+Lobby end
+
+50
+04:15:17,168 --> 04:15:18,168
+Lobby start
+
+51
+04:15:17,485 --> 04:15:25,710
+Lobby end
+
+52
+04:15:31,416 --> 04:17:12,750
+Lobby start - start or end is potentially missing
+
+53
+04:20:15,149 --> 04:20:16,149
+Lobby start - start or end is potentially missing
+
+54
+04:23:35,916 --> 04:23:36,916
+Lobby start
+
+55
+04:23:46,360 --> 04:23:53,968
+Lobby end
+
+56
+04:24:56,347 --> 04:25:02,369
+Lobby start - start or end is potentially missing
+
+57
+04:27:49,253 --> 04:27:50,253
+Lobby start
+
+58
+04:31:03,046 --> 04:31:04,631
+Lobby end
+
+59
+04:31:32,492 --> 04:32:16,520
+Lobby start
+
+60
+04:35:53,119 --> 04:36:23,516
+Lobby end
+
+61
+04:36:30,173 --> 04:36:32,058
+Lobby start
+
+62
+04:36:39,666 --> 04:36:40,666
+Lobby end
+
+63
+04:37:39,826 --> 04:39:19,893
+Lobby start - start or end is potentially missing
+
+64
+04:42:00,770 --> 04:42:01,770
+Lobby start
+
+65
+04:44:10,917 --> 04:44:20,727
+Lobby end
+
+66
+04:44:34,357 --> 04:45:50,349
+Lobby start
+
+67
+04:45:52,885 --> 04:45:53,836
+Lobby end
+
+68
+04:48:27,740 --> 04:48:49,895
+Lobby start
+
+69
+04:48:51,480 --> 04:48:52,480
+Lobby end
+
+70
+04:48:54,016 --> 04:49:17,139
+Lobby start - start or end is potentially missing
+
+71
+04:52:30,616 --> 04:52:31,616
+Lobby start
+
+72
+04:54:00,556 --> 04:54:17,973
+Lobby end
+
+73
+04:54:32,538 --> 04:54:33,538
+Lobby start
+
+74
+04:54:35,708 --> 04:54:38,861
+Lobby end
+
+75
+04:56:07,850 --> 04:56:10,702
+Lobby start
+

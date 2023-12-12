@@ -3,179 +3,311 @@ from datetime import datetime, timedelta
 import pandas as pd
 import os
 import pysrt
+from pysrt import SubRipTime
 
-# CREATE DF WITH METADATA
-con = sqlite3.connect("vods.db")
-cur = con.cursor()
+delete_streamer = True
+delete_streamer_list = []
+while delete_streamer:
+    print(delete_streamer_list)
 
-res = cur.execute("SELECT v.id, m.path, v.published_at, v.start, v.end, m.duration "
-                  "FROM metadata m  JOIN vods v ON m.vod_id = v.id  "
-                  "WHERE `group` = '2022-01-26_S1'")
-data = res.fetchall()
-
-# Create a DataFrame
-columns = ['id', 'path', 'published_at', 'start_delta', 'end_delta', 'duration']
-df = pd.DataFrame(data, columns=columns)
-
-
-# Preprocess DataFrame
-def start_calculator(row):
-    if pd.notnull(row['start_delta']):
-        return datetime.strptime(row['published_at'], '%Y-%m-%d %H:%M:%S.%f') + timedelta(seconds=row['start_delta'])
+    # CREATE DF WITH METADATA
+    con = sqlite3.connect("vods.db")
+    cur = con.cursor()
+    g = '2022-03-01_S1'
+    res = cur.execute("SELECT v.id, m.path, v.published_at, v.start, v.end, m.duration "
+                      "FROM metadata m  JOIN vods v ON m.vod_id = v.id  "
+                      "WHERE `group` = ?", (g,))
+    data = res.fetchall()
+    for name in delete_streamer_list:
+        data = [tup for tup in data if tup[1][39:] != f"{name}.mkv"]
 
 
-def end_calculator(row):
-    if pd.notnull(row['duration']):
-        return row['start_date'] + timedelta(seconds=row['duration'])
+    # Create a DataFrame
+    columns = ['id', 'path', 'published_at', 'start_delta', 'end_delta', 'duration']
+    df = pd.DataFrame(data, columns=columns)
 
 
-df['start_date'] = df.apply(start_calculator, axis=1)
-df['end_date'] = df.apply(end_calculator, axis=1)
-df['path'] = df['path'].apply(lambda x: x[39:-4])
+    # Preprocess DataFrame
+    def start_calculator(row):
+        if pd.notnull(row['start_delta']):
+            return datetime.strptime(row['published_at'], '%Y-%m-%d %H:%M:%S.%f') + timedelta(seconds=row['start_delta'])
 
-# EXTRACT EVENT DATA FROM SRT FILES
 
-streamers = os.listdir('srt')
-if ".DS_Store" in streamers:
-    streamers.remove(".DS_Store")
-streamer_lobbies = {}
-for streamer in streamers:
-    subs = pysrt.open(f"srt/{streamer}")
-    timestamps = []
+    def end_calculator(row):
+        if pd.notnull(row['duration']):
+            return row['start_date'] + timedelta(seconds=row['duration'])
 
-    for sub in subs:
-        event_time = timedelta(hours=sub.start.hours, minutes=sub.start.minutes, seconds=sub.start.seconds,
-                               milliseconds=sub.start.milliseconds)
-        if len(timestamps) == 0:
+
+    df['start_date'] = df.apply(start_calculator, axis=1)
+    df['end_date'] = df.apply(end_calculator, axis=1)
+    df['path'] = df['path'].apply(lambda x: x[39:-4])
+
+    # EXTRACT EVENT DATA FROM SRT FILES
+    srt_path = 'srt/2022-03-01_S1'
+    for name in delete_streamer_list:
+        if os.path.exists(f'{srt_path}/{name}.srt'):
+            os.remove(f'{srt_path}/{name}.srt')
+    streamers = os.listdir(srt_path)
+    if ".DS_Store" in streamers:
+        streamers.remove(".DS_Store")
+    streamer_lobbies = {}
+    for streamer in streamers:
+        subs = pysrt.open(f"{srt_path}/{streamer}")
+        timestamps = []
+
+        for sub in subs:
+            if sub.duration > SubRipTime(seconds=30) or sub.duration < SubRipTime(seconds=2):
+                continue
+            event_time = timedelta(hours=sub.start.hours, minutes=sub.start.minutes, seconds=sub.start.seconds,
+                                   milliseconds=sub.start.milliseconds)
+            if len(timestamps) == 0:
+                if sub.text[:11] == 'Lobby start':
+                    timestamps.append([event_time])
+                else:
+                    timestamps.append([None, event_time])
+                continue
             if sub.text[:11] == 'Lobby start':
-                timestamps.append([event_time])
-            else:
-                timestamps.append([None, event_time])
+                if len(timestamps[-1]) == 1:
+                    timestamps[-1].append(None)
+                    timestamps.append([event_time])
+                else:
+                    timestamps.append([event_time])
+            elif sub.text[:9] == 'Lobby end':
+                if len(timestamps[-1]) <= 1:
+                    timestamps[-1].append(event_time)
+                else:
+                    timestamps.append([None, event_time])
+
+        if len(timestamps[-1]) == 1:  # lonely start at the end
+            timestamps[-1].append(None)
+        streamer_lobbies[streamer] = timestamps
+
+    # MERGE SRT DATA AND METADATA IN DF
+
+    df['lobbies'] = df['path'].apply(lambda x: streamer_lobbies[f'{x}.srt'])
+
+
+    # CHANGE FORMAT OF LOBBY TIMES IN DF TO TIMESTAMPS
+    # Function to calculate the lobby timestamps
+    def sum_timedeltas(row):
+        return [[row['start_date'] + td if td is not None else None
+                 for td in sublist] for sublist in row['lobbies']]
+
+
+    # Apply the function to create a new column 'lobbies_times'
+    df['lobbies_times'] = df.apply(sum_timedeltas, axis=1)
+
+    # kick all lobbies times with a duration < 1 minute (assumption that lobbies usually go longer and no problem if data of short lobby is lost)
+    df['lobbies_times'] = df['lobbies_times'].apply(
+        lambda lst: [x for x in lst if x[1] is None or x[0] is None or (x[1] - x[0]) > timedelta(seconds=60)])
+
+    # CREATE A DICTIONARY OF LOBBIES TO ASSIGN DIFFERENT LOBBY TIMES TO LOBBIES
+    # create list of all the lobbies times
+    df_exploded = df.explode('lobbies_times')
+    all_lobbies_list = df_exploded['lobbies_times'].tolist()
+    sorted_all_lobbies_list = sorted(all_lobbies_list, key=lambda x: (x[0] is None, x[0]))
+
+    # assign lobby times to a lobby dictionary
+    lobby_dic = {}
+    num_counter = 1
+    for lob in sorted_all_lobbies_list:
+        if lob[0] is None or lob[1] is None:  # lobbies containing None will be assigned later on
             continue
-        if sub.text[:11] == 'Lobby start':
-            if len(timestamps[-1]) == 1:
-                timestamps[-1].append(None)
-                timestamps.append([event_time])
-            else:
-                timestamps.append([event_time])
-        elif sub.text[:9] == 'Lobby end':
-            if len(timestamps[-1]) <= 1:
-                timestamps[-1].append(event_time)
-            else:
-                timestamps.append([None, event_time])
-
-    if len(timestamps[-1]) == 1:  # lonely start at the end
-        timestamps[-1].append(None)
-    streamer_lobbies[streamer] = timestamps
-
-# MERGE SRT DATA AND METADATA IN DF
-
-df['lobbies'] = df['path'].apply(lambda x: streamer_lobbies[f'{x}.srt'])
+        assigned_to_lobby = False
+        for i in lobby_dic.keys():
+            if lob[0] - lobby_dic[i]['lobby_start'] < timedelta(
+                    minutes=2):  # and lob[1] - lobby_dic[i]['lobby_end'] < timedelta(minutes=2):
+                lobby_dic[i]['timestamp_list'].append(lob)
+                lobby_dic[i]['lobby_start'] = lob[0]
+                lobby_dic[i]['lobby_end'] = lob[1]
+                assigned_to_lobby = True
+                break
+        if assigned_to_lobby:
+            continue
+        else:
+            lobby_dic[num_counter] = {'lobby_start': lob[0],
+                                      'lobby_end': lob[1],
+                                      'timestamp_list': [lob]}
+            num_counter += 1
 
 
-# Function to calculate the lobby timestamps
-def sum_timedeltas(row):
-    return [[row['start_date'] + td if td is not None else None
-             for td in sublist] for sublist in row['lobbies']]
-
-
-# Apply the function to create a new column 'SumTimedeltas'
-df['lobbies_times'] = df.apply(sum_timedeltas, axis=1)
-
-# create list of all the lobbies times
-df_exploded = df.explode('lobbies_times')
-all_lobbies_list = df_exploded['lobbies_times'].tolist()
-sorted_all_lobbies_list = sorted(all_lobbies_list, key=lambda x: (x[0] is None, x[0]))
-
-# assign lobby times to a lobby dictionary
-lobby_dic = {}
-num_counter = 1
-for lob in sorted_all_lobbies_list:
-    if lob[0] is None or lob[1] is None:
-        continue
-    assigned_to_lobby = False
+    # ASSIGN LOBBY TIMES CONTAINING A NONE VALUE
+    # to assign lobby times with None as start value extract median lobby start / end for built lobbies
     for i in lobby_dic.keys():
-        if lob[0] - lobby_dic[i]['lobby_start'] < timedelta(
-                minutes=2):  # and lob[1] - lobby_dic[i]['lobby_end'] < timedelta(minutes=2):
-            lobby_dic[i]['timestamp_list'].append(lob)
-            lobby_dic[i]['lobby_start'] = lob[0]
-            lobby_dic[i]['lobby_end'] = lob[1]
-            assigned_to_lobby = True
-            break
-    if assigned_to_lobby:
-        continue
-    else:
-        lobby_dic[num_counter] = {'lobby_start': lob[0],
-                                  'lobby_end': lob[1],
-                                  'timestamp_list': [lob]}
-        num_counter += 1
+        lobby_starts = sorted([x[0] for x in lobby_dic[i]['timestamp_list']])
+        lobby_dic[i]['lobby_start'] = lobby_starts[int(len(lobby_starts) / 2) - 1]
+        lobby_ends = sorted([x[1] for x in lobby_dic[i]['timestamp_list']])
+        lobby_dic[i]['lobby_end'] = lobby_ends[int(len(lobby_ends) / 2) - 1]
 
-# to assign lobby times with None as start value extract median lobby start / end for built lobbies
-for i in lobby_dic.keys():
-    lobby_starts = sorted([x[0] for x in lobby_dic[i]['timestamp_list']])
-    lobby_dic[i]['lobby_start'] = lobby_starts[int(len(lobby_starts) / 2) - 1]
-    lobby_ends = sorted([x[1] for x in lobby_dic[i]['timestamp_list']])
-    lobby_dic[i]['lobby_end'] = lobby_ends[int(len(lobby_ends) / 2) - 1]
-
-# now assign lobby times with None to lobbies
-for lob in sorted_all_lobbies_list:
-    if lob[0] is None or lob[1] is None:
-        assigned = False
-        if lob[0] is None:
-            for i in lobby_dic.keys():
-                if abs(lob[1] - lobby_dic[i]['lobby_end']) < timedelta(minutes=2):
-                    lobby_dic[i]['timestamp_list'].append(lob)
-                    assigned = True
-                    break
-            if not assigned:
-                print(lob)
-        elif lob[1] is None:
-            for i in lobby_dic.keys():
-                if abs(lob[0] - lobby_dic[i]['lobby_start']) < timedelta(minutes=2):
-                    lobby_dic[i]['timestamp_list'].append(lob)
-                    assigned = True
-                    break
-            if not assigned:
-                print(lob)
-    else:
-        continue
-
-
-# delete all lobbies which have only one timestamp which is also shorter than one minute
-del_list = []
-for k, v in lobby_dic.items():
-    if len(v['timestamp_list']) == 1:
-        try:
-            short_lobby = (v['timestamp_list'][0][1] - v['timestamp_list'][0][0]) < timedelta(minutes=1)
-            if short_lobby:
-                del_list.append(k)
-        except:
+    # now assign lobby times with None to lobbies
+    for lob in sorted_all_lobbies_list:
+        if lob[0] is None or lob[1] is None:
+            assigned = False
+            if lob[0] is None:
+                for i in lobby_dic.keys():
+                    if abs(lob[1] - lobby_dic[i]['lobby_end']) < timedelta(minutes=2):
+                        lobby_dic[i]['timestamp_list'].append(lob)
+                        assigned = True
+                        break
+                if not assigned:
+                    print(lob)
+            elif lob[1] is None:
+                for i in lobby_dic.keys():
+                    if abs(lob[0] - lobby_dic[i]['lobby_start']) < timedelta(minutes=2):
+                        lobby_dic[i]['timestamp_list'].append(lob)
+                        assigned = True
+                        break
+                if not assigned:
+                    print(lob)
+        else:
             continue
+
+
+    # DELETE "WRONG" LOBBIES
+    # delete all lobbies which have only one timestamp which is also shorter than one minute
+    del_list = []
+    for k, v in lobby_dic.items():
+        if len(v['timestamp_list']) == 1:
+            try:
+                short_lobby = (v['timestamp_list'][0][1] - v['timestamp_list'][0][0]) < timedelta(minutes=1)
+                if short_lobby:
+                    del_list.append(k)
+            except:
+                continue
+    for k in del_list:
+        lobby_dic.pop(k)
+    # restore order in lobby names such that one does not skip some numbers
+    keys = sorted(list(lobby_dic.keys()))
+    new_dic = {}
+    c = 1
+    for i in keys:
+        new_dic[c] = lobby_dic[i]
+        c += 1
+    lobby_dic = new_dic
+
+
+    # CREATE COLUMN IN DF MAPPING LOBBY TIMES TO LOBBIES
+    # create new column in df in which lobby times are mapped to lobbies
+    def find_lobby(sublist):
+        for k, v in lobby_dic.items():
+            if sublist in v['timestamp_list']:
+                return k
+        return None
+
+
+    df['lobbies_assigned_with_None'] = df['lobbies_times'].apply(lambda sublists: [find_lobby(sublist) for sublist in sublists])
+
+
+    # check for streamers where event extraction did not work: more than 50% of extracted lobby times are assigned to lobbies with no other lobby times
+    def single_lobbies_counter(row):
+        counter = 0
+        for lobby in row['lobbies_assigned_with_None']:
+            if lobby is None:
+                counter += 1
+            elif len(lobby_dic[lobby]['timestamp_list']) == 1:
+                counter += 1
+        return counter / len(row['lobbies_assigned_with_None'])
+
+
+    df['single_lobby_score'] = df.apply(lambda row: single_lobbies_counter(row), axis=1)
+
+    delete_streamer = False
+    delete_streamer_list = delete_streamer_list + list(df.loc[df['single_lobby_score'] > 0.5, 'path'].values)
+    if len(list(df.loc[df['single_lobby_score'] > 0.5, 'path'].values)) > 0:
+        delete_streamer = True
+
+
+# merge lobbies according to end timestamps
+for h in sorted(list(lobby_dic.keys()), reverse=True):
+    for j in sorted(list(lobby_dic.keys()), reverse=True):
+        if j == h:
+            continue
+        elif abs(lobby_dic[j]['lobby_end'] - lobby_dic[h]['lobby_end']) < timedelta(seconds=45):
+            lobby_dic[j]['timestamp_list'] = lobby_dic[j]['timestamp_list'] + lobby_dic[h]['timestamp_list']
+            lobby_dic[h]['lobby_end'] = pd.Timestamp('2099-01-01 00:00:01')
+            df['lobbies_assigned_with_None'] = df['lobbies_assigned_with_None'].apply(lambda lst: [j if x == h else x for x in lst])
+            break
+
+# recreate order in lobby dic
+del_list = []
+for k in lobby_dic.keys():
+    if lobby_dic[k]['lobby_end'] == pd.Timestamp('2099-01-01 00:00:01'):
+        del_list.append(k)
 for k in del_list:
     lobby_dic.pop(k)
-# restore order in lobby names such that one does not skip some numbers
+# restore order in dic and create mapper for df
 keys = sorted(list(lobby_dic.keys()))
 new_dic = {}
+mapper = {}
 c = 1
 for i in keys:
     new_dic[c] = lobby_dic[i]
+    mapper[i] = c
     c += 1
 lobby_dic = new_dic
+# restore order in df using mapper
+for source in sorted(list(mapper.keys())):
+    df['lobbies_assigned_with_None'] = df['lobbies_assigned_with_None'].apply(
+        lambda lst: [mapper[source] if x == source else x for x in lst])
 
 
+# when lobbies are wrongly ordered time-wise (lobby_n has later end than  lobby_n+1) find lobby time causing this and split this lobby time up into two lobbies
+# first identify these lobbies
+wrong_lobbies = []
+keys = list(lobby_dic.keys())
+for i in range(1, len(keys)):
+    if lobby_dic[keys[i]]['lobby_end'] < lobby_dic[keys[i-1]]['lobby_end']:
+        wrong_lobbies.append(keys[i-1])
+for wl in wrong_lobbies:
+    # identify timestamp causing error in this lobby
+    for l_times in lobby_dic[wl]['timestamp_list']:
+        if l_times[0] == lobby_dic[wl]['lobby_start'] and l_times[1] == lobby_dic[wl]['lobby_end']:
+            wrong_timestamp = l_times
+            break
+    id = df[df['lobbies_times'].apply(
+        lambda lst: wrong_timestamp in lst)]['id']  # id of streamers belonging to this lobby time
+    for streamer in id.values:
+        old_lobby_times = list(df.loc[df['id'] == streamer, 'lobbies_times'])[0]
+        old_lobby_assignments = list(df.loc[df['id'] == streamer, 'lobbies_assigned_with_None'])[0]
+        for index, j in enumerate(old_lobby_times):
+            if j == l_times:
+                break
+        # now adjust values in df for causing streamer
+        old_lobby_assignments.insert(index, wl+1)  # here just adding new lobby as old lobby assignment can remain just one shifted (inserted at wrong position because in following list comprehension for all streamers this is accounted for
+        old_lobby_times.insert(index, [l_times[0], None])  # these operations are applied in the df as well as pointer is still on the list
+        old_lobby_times.insert(index + 1, [None, l_times[1]])
+        old_lobby_times.remove(l_times)
+        # adjust values in df for all other streamers: assign wrong lobby with correct number and following lobby with number of wrong lobby
+        df['lobbies_assigned_with_None'] = df['lobbies_assigned_with_None'].apply(
+            lambda lst: [wl + 1 if x == wl else (wl if x == wl + 1 else x) for x in lst])
 
-# create new column in df in which lobby times are mapped to lobbies
-def find_lobby(sublist):
-    for k, v in lobby_dic.items():
-        if sublist in v['timestamp_list']:
-            return k
-    return None
+        # remove wrong timestamp and add new timestamps also from / to lobby_dic
+        lobby_dic[wl]['timestamp_list'].remove(l_times)
+        lobby_dic[wl + 1]['timestamp_list'].append([l_times[0], None])
+        lobby_dic[wl]['timestamp_list'].append([None, l_times[1]])
 
 
-df['lobbies_assigned_with_None'] = df['lobbies_times'].apply(lambda sublists: [find_lobby(sublist) for sublist in sublists])
+# now adjust lobby dic
+for wl in wrong_lobbies:
+    wrong_lobby_values = lobby_dic[wl]
+    other_lobby_values = lobby_dic[wl + 1]
+    lobby_dic[wl] = other_lobby_values
+    lobby_dic[wl + 1] = wrong_lobby_values
+    # calculate new start and end values for wrong lobby
+    lobby_starts = sorted([x[0] for x in lobby_dic[wl + 1]['timestamp_list'] if x[0] is not None])
+    if len(lobby_starts) != 0:
+        lobby_dic[wl+1]['lobby_start'] = lobby_starts[int(len(lobby_starts) / 2) - 1]
+    else:
+        lobby_dic[wl+1]['lobby_start'] = None
 
+    lobby_ends = sorted([x[1] for x in lobby_dic[wl + 1]['timestamp_list'] if x[0] is not None])
+    if len(lobby_ends) != 0:
+        lobby_dic[wl+1]['lobby_end'] = lobby_ends[int(len(lobby_ends) / 2) - 1]
+    else:
+        lobby_dic[wl+1]['lobby_end'] = None
 
-# kick all lobby times which are assigned to no lobby and which lie between two subsequent lobbies
+# IMPROVE LOBBY ASSIGNMENTS BY APPLYING SOME RULES
+# kick all lobby times which are assigned to no lobby and which lie between two subsequent lobbies (only lobby times containing at least one None are not assigned to a lobby)
 def kick_none_lobbies(row, base_column):
     kick_list = []
     for ind, v in enumerate(row['lobbies_assigned_with_None']):
@@ -195,19 +327,21 @@ df['lobbies_assigned'] = df.apply(lambda row: kick_none_lobbies(row, 'lobbies_as
 df['lobbies_times_assigned'] = df.apply(lambda row: kick_none_lobbies(row, 'lobbies_times'), axis=1)
 
 
-# when for a streamer two lobby times are assigned to the same lobby, check if second one has no start timestamp and if so merge
-def merge_lobbies(row):
+# when for a streamer two lobby times are assigned to the same lobby, check if second one has no start timestamp or first one has no end timestamp and if so merge
+def merge_lobbies(row, lobbies_column, lobbies_times_column):
     unique_set = set()
-    duplicates_lobbies = set(x for x in row['lobbies_assigned'] if x in unique_set or unique_set.add(x))
+    duplicates_lobbies = set(x for x in row[lobbies_column] if x in unique_set or unique_set.add(x))
     duplicates_lobbies = sorted(list(duplicates_lobbies))
     indices = []
     for i in duplicates_lobbies:
-        indices.append(row['lobbies_assigned'].index(i))
+        indices.append(row[lobbies_column].index(i))
     indices = sorted(indices, reverse=True)
-    times_final = row['lobbies_times_assigned'].copy()
-    lobbies_final = row['lobbies_assigned'].copy()
+    times_final = row[lobbies_times_column].copy()
+    lobbies_final = row[lobbies_column].copy()
     for ind in indices:
-        if times_final[ind+1][0] is None and times_final[ind][0] is not None and times_final[ind][1] is not None:
+        if (times_final[ind+1][0] is None and times_final[ind][0] is not None and times_final[ind][1] is not None)\
+                or (times_final[ind][1] is None and times_final[ind][0] is not None and times_final[ind+1][1] is not None)\
+                or (times_final[ind][0] is None and times_final[ind][1] is not None and times_final[ind+1][1] is not None):
             new_timestamp = [times_final[ind][0], times_final[ind+1][1]]
             times_final.pop(ind+1)
             times_final.pop(ind)
@@ -216,10 +350,44 @@ def merge_lobbies(row):
     return times_final, lobbies_final
 
 
-df[['lobbies_times_final', 'lobbies_assigned_final']] = df.apply(lambda row: merge_lobbies(row), axis=1, result_type='expand')
+df[['lobbies_times_final', 'lobbies_assigned_final']] = df.apply(lambda row: merge_lobbies(row, 'lobbies_assigned', 'lobbies_times_assigned'), axis=1, result_type='expand')
+for counter in range(3):  # in case there are multiple lobby times for one streamer assigned to same lobby. I start with two last ones and then move to front. So if lobby time 2,3,4 are assigned to lobby 8, i start with merging 3&4 and then 2&the merged lobby times
+    # Now new columns as input parameters as the first applied merge was stored in these columns.
+    df[['lobbies_times_final', 'lobbies_assigned_final']] = df.apply(
+        lambda row: merge_lobbies(row, 'lobbies_assigned_final', 'lobbies_times_final'), axis=1, result_type='expand')
 
+"""
+# remove timestamps of lobby outliers with weird end times caused by very long duration of end event in srt event
+# create streamer duration dictionary to check for detected end time outliers whether their srt end event is suspiciously long
+streamer_duration_lobbies = {}
+for streamer in streamers:
+    subs = pysrt.open(f"{srt_path}/{streamer}")
+    timestamps = []
 
-# check for all final lobbies for outliers within the lobbies
+    for sub in subs:
+        if len(timestamps) == 0:
+            if sub.text[:11] == 'Lobby start':
+                timestamps.append([sub.duration])
+            else:
+                timestamps.append([None, sub.duration])
+            continue
+        if sub.text[:11] == 'Lobby start':
+            if len(timestamps[-1]) == 1:
+                timestamps[-1].append(None)
+                timestamps.append([sub.duration])
+            else:
+                timestamps.append([sub.duration])
+        elif sub.text[:9] == 'Lobby end':
+            if len(timestamps[-1]) <= 1:
+                timestamps[-1].append(sub.duration)
+            else:
+                timestamps.append([None, sub.duration])
+
+    if len(timestamps[-1]) == 1:  # lonely start at the end
+        timestamps[-1].append(None)
+    streamer_duration_lobbies[streamer] = timestamps
+"""
+# go over all lobbies and for each lobby find those lobby times which have an end time that is more than 15 sec away from at least two other end times in this lobby
 def checker(row, num):
     try:
         ind = row['lobbies_assigned_final'].index(num)
@@ -230,7 +398,7 @@ def checker(row, num):
     else:
         return None
 
-
+"""
 number_extracted_lobbies = max(df['lobbies_assigned_final'].apply(lambda x: max(x)))
 for lobby_num in range(1, number_extracted_lobbies):
 
@@ -241,9 +409,46 @@ for lobby_num in range(1, number_extracted_lobbies):
     for i in range(len(r)):
         if r[i] is None:
             del_list.append(i)
-    del_list = sorted(del_list, reverse= True)
+    del_list = sorted(del_list, reverse=True)
     for ind in del_list:
         r.drop(ind, inplace=True)
+    streamer_lookup = list(r.index)
+    r.index = list(range(len(r)))
+
+    for i in range(len(r)):
+        c = 0
+        for j in range(len(r)):  # check end time of event
+            if r[i][1] is not None and r[j][1] is not None:
+                if abs(r[i][1] - r[j][1]) > timedelta(seconds=15):
+                    c += 1
+        if c >= 2:  # if at least two other lobby ends in this lobby are more than 15 sec away check duration of end srt event
+            idx_in_streamer_duration_dic = list(df[df["path"] == df["path"][streamer_lookup[i]]]["lobbies_times"])[0].index(r[i])
+            if streamer_duration_lobbies[f'{df["path"][streamer_lookup[i]]}.srt'][idx_in_streamer_duration_dic][1] > SubRipTime(seconds=30):  # if end event duration is larger than 30 sec set its timestamp to None
+                idx = list(df[df["path"] == df["path"][streamer_lookup[i]]]["lobbies_times_final"])[0].index(r[i])  # find position in lobby times final list
+                def gg(row, sn, li):
+                    if row['path'] == sn:
+                        row['lobbies_times_final'][li] = None
+                df.apply(lambda row: gg(row, df["path"][streamer_lookup[i]], idx), axis=1)
+
+"""
+
+
+# EVALUATION OF LOBBY ASSIGNMENTS
+# check for all final lobbies for outliers within the lobbies
+number_extracted_lobbies = max(df['lobbies_assigned_final'].apply(lambda x: max(x, key=lambda y: float('-inf') if y is None else y)))
+for lobby_num in range(1, number_extracted_lobbies):
+
+    r = df.apply(lambda row: checker(row, lobby_num), axis=1)
+
+    # delete all streamers which did not join the lobby and thus have None in this row
+    del_list = []
+    for i in range(len(r)):
+        if r[i] is None:
+            del_list.append(i)
+    del_list = sorted(del_list, reverse=True)
+    for ind in del_list:
+        r.drop(ind, inplace=True)
+    streamer_lookup = list(r.index)
     r.index = list(range(len(r)))
 
     for i in range(len(r)):
@@ -262,3 +467,29 @@ for lobby_num in range(1, number_extracted_lobbies):
                     c += 1
         if c >= 2:
             print(f'Lobby number: {lobby_num}, id: {i}, end - {r[i]}')
+
+# check for all streamers if final lobbies assigned are subsequent numbers
+for j in range(len(df)):
+    lobbies = df['lobbies_assigned_final'][j]
+    for i in range(len(lobbies) - 1):
+        if lobbies[i] is None:
+            print(f'Streamer: {df["path"][j]}: Lobbies numbers not consecutive: {lobbies[i]} and {lobbies[i+1]}')
+        elif lobbies[i] + 1 != lobbies[i + 1]:
+            print(f'Streamer: {df["path"][j]}: Lobbies numbers not consecutive: {lobbies[i]} and {lobbies[i+1]}')
+
+
+subs = pysrt.open(f"{srt_path}/2022-01-26_S1_cheesybluenips_1276937517.srt")
+for i in subs:
+    print(i.text)
+    print(i.start)
+    print(i.duration)
+
+
+for i in lobby_dic.keys():
+    print(f'{i}: start: {lobby_dic[i]["lobby_start"]}  end: {lobby_dic[i]["lobby_end"]} amount: {len(lobby_dic[i]["timestamp_list"])}')
+
+
+df['lobbies_times'][0]
+df['new'] = df['lobbies_times'].apply(lambda lst: [x for x in lst if x[1] is None or x[0] is None or (x[1] - x[0]) > timedelta(seconds=60)])
+df['lobbies_times'][9]
+df['new'][9]

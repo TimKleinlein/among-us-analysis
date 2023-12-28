@@ -43,11 +43,16 @@ for session in sessions:
                 def start_calculator(row):
                     if pd.notnull(row['start_delta']):
                         return datetime.strptime(row['published_at'], '%Y-%m-%d %H:%M:%S.%f') + timedelta(seconds=row['start_delta'])
+                    else:
+                        return datetime.strptime(row['published_at'], '%Y-%m-%d %H:%M:%S.%f')
 
 
                 def end_calculator(row):
                     if pd.notnull(row['duration']):
                         return row['start_date'] + timedelta(seconds=row['duration'])
+                    else:
+                        print(f'There is a streamer without duration: {row["path"]}')
+                        print("\n\n\n")
 
 
                 df['start_date'] = df.apply(start_calculator, axis=1)
@@ -62,6 +67,21 @@ for session in sessions:
                 streamers = os.listdir(srt_path)
                 if ".DS_Store" in streamers:
                     streamers.remove(".DS_Store")
+
+                # remove all streamers for which i do not have a srt file
+                def delete_streamer_without_srt(path):
+                    if f'{path}.srt' in streamers:
+                        return 0
+                    else:
+                        print(f"Streamer without srt file: {path}")
+                        print("\n\n\n")
+                        return 1
+
+                df['drop'] = df['path'].apply(lambda x: delete_streamer_without_srt(x))
+                df = df[df['drop'] == 0]
+                df = df.drop('drop', axis=1)
+                df = df.reset_index(drop=True)
+
                 streamer_lobbies = {}
                 for streamer in streamers:
                     subs = pysrt.open(f"{srt_path}/{streamer}")
@@ -260,7 +280,52 @@ for session in sessions:
                     lambda lst: [mapper[source] if x == source else x for x in lst])
 
 
-            # when lobbies are wrongly ordered time-wise (lobby_n has later end than  lobby_n+1) find lobby time causing this and split this lobby time up into two lobbies
+            # when lobbies are wrongly ordered time-wise (lobby_n has later end than lobby_n+1) find lobby time causing this and split this lobby time up into two lobbies
+            # first case: second lobby is causing the problem because it has only one lobby time ending too early -> move this lobby time to prior lobby and delete later lobby
+            wrong_lobbies = []
+            deleted_lobbies = []
+            keys = list(lobby_dic.keys())
+            for i in range(1, len(keys)):
+                if lobby_dic[keys[i]]['lobby_end'] < lobby_dic[keys[i - 1]]['lobby_end']:
+                    wrong_lobbies.append(keys[i - 1])
+            for wl in wrong_lobbies:
+                if len(lobby_dic[wl+1]['timestamp_list']) == 1:
+                    wrong_timestamp = lobby_dic[wl+1]['timestamp_list'][0]
+                    id = df[df['lobbies_times'].apply(
+                        lambda lst: wrong_timestamp in lst)]['id']  # id of streamers belonging to this lobby time
+                    for streamer in id.values:
+                        old_lobby_times = list(df.loc[df['id'] == streamer, 'lobbies_times'])[0]
+                        old_lobby_assignments = list(df.loc[df['id'] == streamer, 'lobbies_assigned_with_None'])[0]
+                        for index, j in enumerate(old_lobby_times):
+                            if j == wrong_timestamp:
+                                break
+                        # now adjust values in df for causing streamer
+                        old_lobby_assignments.insert(index,
+                                                     wl)
+                        old_lobby_assignments.remove(wl+1)
+
+                        # now add lobby time to correct lobby in lobby dic and then delete wrong lobby
+                        lobby_dic[wl]['timestamp_list'].append(wrong_timestamp)
+                        lobby_dic.pop(wl+1)
+                        deleted_lobbies.append(wl+1)
+
+            # now recreate order in lobby dic and df because of deleted lobbies
+            # restore order in dic and create mapper for df
+            keys = sorted(list(lobby_dic.keys()))
+            new_dic = {}
+            mapper = {}
+            c = 1
+            for i in keys:
+                new_dic[c] = lobby_dic[i]
+                mapper[i] = c
+                c += 1
+            lobby_dic = new_dic
+            # restore order in df using mapper
+            for source in sorted(list(mapper.keys())):
+                df['lobbies_assigned_with_None'] = df['lobbies_assigned_with_None'].apply(
+                    lambda lst: [mapper[source] if x == source else x for x in lst])
+
+            # second case: first lobby is causing the problem: only one lobby time ending too late -> split this lobby time up into two lobby times with None's (one in each lobby), then change order of lobbies to be correct
             # first identify these lobbies
             wrong_lobbies = []
             keys = list(lobby_dic.keys())
@@ -340,6 +405,8 @@ for session in sessions:
             def merge_lobbies(row, lobbies_column, lobbies_times_column):
                 unique_set = set()
                 duplicates_lobbies = set(x for x in row[lobbies_column] if x in unique_set or unique_set.add(x))
+                if None in duplicates_lobbies:
+                    duplicates_lobbies.remove(None)
                 duplicates_lobbies = sorted(list(duplicates_lobbies))
                 indices = []
                 for i in duplicates_lobbies:

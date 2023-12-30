@@ -374,7 +374,8 @@ for session in sessions:
                 else:
                     lobby_dic[wl+1]['lobby_start'] = None
 
-                lobby_ends = sorted([x[1] for x in lobby_dic[wl + 1]['timestamp_list'] if x[0] is not None])
+                lobby_ends = sorted([x[1] for x in lobby_dic[wl + 1]['timestamp_list'] if x[1] is not None])
+
                 if len(lobby_ends) != 0:
                     lobby_dic[wl+1]['lobby_end'] = lobby_ends[int(len(lobby_ends) / 2) - 1]
                 else:

@@ -6,10 +6,10 @@ import pysrt
 from pysrt import SubRipTime
 import sys
 
-#sessions = os.listdir("../../../dimstore/pop520978/data")
-#sessions.remove('unsorted')
-#sessions.remove('copy_files.sh')
-sessions = ["2022-01-26_S1"]
+sessions = os.listdir("../../../dimstore/pop520978/data")
+sessions.remove('unsorted')
+sessions.remove('copy_files.sh')
+
 
 for session in sessions:
     #with open(f'{session}.txt', 'w') as file:

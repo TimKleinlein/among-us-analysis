@@ -661,11 +661,48 @@ for session in sessions:
                     ind = list(df[df['path'] == s]['lobbies_assigned_final'])[0].index(l)
                     times_all.append([l, list(df[df['path'] == s]['lobbies_times_final'])[0][ind]])
 
-            print(f'Streamer: {s} -- Nr of critical lobbies not existing:{lobbies_not_existing} -- {times_critical}')
-            print(f'Streamer: {s} -- {times_all}')
+            # change lobby times to srt format for better manual extraction
+            start_date = list(df[df['path'] == s]['start_date'])[0]
+
+            srt_times_critical = []
+            for item in times_critical:
+                new_sublist = [item[0]]
+                timestamps = item[1]
+
+                if timestamps[0] is not None:
+                    new_sublist.append(timestamps[0] - start_date)
+                else:
+                    new_sublist.append(None)
+
+                if timestamps[1] is not None:
+                    new_sublist.append(timestamps[1] - start_date)
+                else:
+                    new_sublist.append(None)
+
+                srt_times_critical.append(new_sublist)
+
+
+            srt_times_all = []
+            for item in times_all:
+                new_sublist = [item[0]]
+                timestamps = item[1]
+
+                if timestamps[0] is not None:
+                    new_sublist.append(timestamps[0] - start_date)
+                else:
+                    new_sublist.append(None)
+
+                if timestamps[1] is not None:
+                    new_sublist.append(timestamps[1] - start_date)
+                else:
+                    new_sublist.append(None)
+
+                srt_times_all.append(new_sublist)
+
+            print(f'Streamer: {s} -- Nr of critical lobbies not existing:{lobbies_not_existing} -- {srt_times_critical}')
+            print(f'Streamer: {s} -- {srt_times_all}')
 
 
 
     except Exception as e:
         print(f"An error occurred: {e}")
-

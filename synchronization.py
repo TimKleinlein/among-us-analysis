@@ -701,6 +701,9 @@ for session in sessions:
                 print(f'Streamer: {s} -- Nr of critical lobbies not existing:{lobbies_not_existing} -- {srt_times_critical}')
                 print(f'Streamer: {s} -- {srt_times_all}')
 
+            # extract assigned lobby numbers from df as csv to insert manual lobby extraction results
+            df_lobby_numbers = df[['path', 'lobbies_assigned_final']]
+            df_lobby_numbers.to_csv(f'{session}.csv', index=False)
 
 
         except Exception as e:

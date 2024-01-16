@@ -5,6 +5,7 @@ import os
 import pysrt
 from pysrt import SubRipTime
 import sys
+import pickle
 
 sessions = os.listdir("../../../dimstore/pop520978/data")
 sessions.remove('unsorted')
@@ -704,6 +705,15 @@ for session in sessions:
             # extract assigned lobby numbers from df as csv to insert manual lobby extraction results
             df_lobby_numbers = df[['path', 'lobbies_assigned_final']]
             df_lobby_numbers.to_csv(f'{session}.csv', index=False)
+
+            # extract dictionary with trustworthy lobby times for streamers
+            extract_dic = {}
+            for i in trustworthy_streamer_dic.keys():
+                extract_dic[i] = {}
+                extract_dic[i]['start_time'] = df[df["path"] == i]["start_date"]
+                extract_dic[i]['lobbies'] = trustworthy_streamer_dic[i]
+                with open(f'{session}_streamer.pkl', 'wb') as f:
+                    pickle.dump(extract_dic, f)
 
 
         except Exception as e:

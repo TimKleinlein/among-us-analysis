@@ -712,8 +712,21 @@ for session in sessions:
                 extract_dic[i] = {}
                 extract_dic[i]['start_time'] = df[df["path"] == i]["start_date"]
                 extract_dic[i]['lobbies'] = trustworthy_streamer_dic[i]
-                with open(f'{session}_streamer.pkl', 'wb') as f:
-                    pickle.dump(extract_dic, f)
+            with open(f'{session}_streamer.pkl', 'wb') as f:
+                pickle.dump(extract_dic, f)
+
+            # extract dictionary with trustworthy lobby times for lobbies
+            extract_lobby_dic = {}
+            for k in lobby_dic.keys():
+                lobby = lobby_dic[k]
+                extract_lobby_dic[k] = {}
+                for times in lobby['trustworthy_times']:
+                    for i in range(len(df)):
+                        if times in df['lobbies_times_final'][i]:
+                            extract_lobby_dic[k][df['path'][i]] = times
+            with open(f'{session}_lobbies.pkl', 'wb') as f:
+                pickle.dump(extract_lobby_dic, f)
+
 
 
         except Exception as e:

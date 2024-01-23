@@ -1,0 +1,38 @@
+SESSION: 2022-01-27_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-01-27_S1_zeroyalviking_1277951635: Lobbies numbers not consecutive: 5 and 7
+Streamer: 2022-01-27_S1_vikramafc_1277853071: Lobbies numbers not consecutive: 4 and 6
+Streamer: 2022-01-27_S1_vikramafc_1277853071: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-01-27_S1_skadj_1277962846: Lobbies numbers not consecutive: 17 and None
+Streamer: 2022-01-27_S1_karacorvus_1277942347: Lobbies numbers not consecutive: 15 and 15
+Streamer: 2022-01-27_S1_karacorvus_1277942347: Lobbies numbers not consecutive: 15 and 15
+Streamer: 2022-01-27_S1_willyutv_1277946542: Lobbies numbers not consecutive: 6 and 8
+Streamer: 2022-01-27_S1_willyutv_1277946542: Lobbies numbers not consecutive: 9 and 11
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 10 - Start: 2022-01-27 21:33:44.333000 - End: 2022-01-27 21:39:53.666000
+Lobby has no trustworthy times: 16 - Start: 2022-01-27 22:37:10.333000 - End: 2022-01-27 22:44:54.333000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-01-27_S1_karacorvus_1277942347']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-01-27_S1_karacorvus_1277942347 -- Nr of critical lobbies not existing:0 -- [[10, None, Timedelta('0 days 01:24:53')], [16, Timedelta('0 days 02:27:39'), Timedelta('0 days 02:29:58.333000')]]
+Streamer: 2022-01-27_S1_karacorvus_1277942347 -- [[1, Timedelta('0 days 00:00:26'), Timedelta('0 days 00:07:08.666000')], [2, Timedelta('0 days 00:08:18.666000'), Timedelta('0 days 00:18:13')], [3, Timedelta('0 days 00:19:06'), Timedelta('0 days 00:25:02.333000')], [4, Timedelta('0 days 00:25:50.333000'), Timedelta('0 days 00:33:30')], [5, Timedelta('0 days 00:34:07.333000'), Timedelta('0 days 00:39:39.666000')], [6, None, Timedelta('0 days 00:48:06.333000')], [7, None, Timedelta('0 days 01:02:53.333000')], [8, None, Timedelta('0 days 01:08:01.666000')], [9, Timedelta('0 days 01:09:46.666000'), Timedelta('0 days 01:18:10.666000')], [10, None, Timedelta('0 days 01:24:53')], [11, None, Timedelta('0 days 01:35:14.333000')], [12, None, Timedelta('0 days 01:46:02.666000')], [13, None, Timedelta('0 days 02:01:46')], [14, None, Timedelta('0 days 02:09:37.333000')], [15, Timedelta('0 days 02:11:09'), None], [16, Timedelta('0 days 02:27:39'), Timedelta('0 days 02:29:58.333000')], [17, Timedelta('0 days 02:31:08.333000'), Timedelta('0 days 02:42:06')]]

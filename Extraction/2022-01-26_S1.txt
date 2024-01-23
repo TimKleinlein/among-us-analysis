@@ -1,0 +1,37 @@
+SESSION: 2022-01-26_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-01-26_S1_skadj_1276937877: Lobbies numbers not consecutive: 14 and 16
+Streamer: 2022-01-26_S1_jvckk_1276935029: Lobbies numbers not consecutive: 13 and 15
+Streamer: 2022-01-26_S1_cheesybluenips_1276937517: Lobbies numbers not consecutive: 11 and None
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-01-26_S1_uneasypeasy_1276935530', '2022-01-26_S1_irepptar_1276593830', '2022-01-26_S1_br00d_1276931103', '2022-01-26_S1_aribunnie_1276931864']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-01-26_S1_uneasypeasy_1276935530 -- Nr of critical lobbies not existing:0 -- []
+Streamer: 2022-01-26_S1_uneasypeasy_1276935530 -- [[1, Timedelta('0 days 00:06:20'), Timedelta('0 days 00:14:45')], [2, Timedelta('0 days 00:21:15'), Timedelta('0 days 00:25:01')], [3, Timedelta('0 days 00:26:09.333000'), Timedelta('0 days 00:33:32.333000')], [4, Timedelta('0 days 00:34:47.666000'), Timedelta('0 days 00:45:16.333000')], [5, Timedelta('0 days 00:48:45.333000'), Timedelta('0 days 00:54:29.666000')], [6, Timedelta('0 days 00:55:21.666000'), Timedelta('0 days 01:02:16.333000')], [7, Timedelta('0 days 01:03:30'), Timedelta('0 days 01:05:11')], [8, Timedelta('0 days 01:06:13.666000'), Timedelta('0 days 01:14:50')], [9, Timedelta('0 days 01:16:14.666000'), Timedelta('0 days 01:24:38.666000')], [10, Timedelta('0 days 01:25:51.333000'), Timedelta('0 days 01:37:01')], [11, Timedelta('0 days 01:38:42.666000'), Timedelta('0 days 01:44:08.666000')], [12, Timedelta('0 days 01:52:15.666000'), Timedelta('0 days 01:58:20.666000')], [13, Timedelta('0 days 01:59:20.333000'), Timedelta('0 days 02:01:27.333000')], [14, Timedelta('0 days 02:02:49.333000'), Timedelta('0 days 02:08:52.666000')], [15, Timedelta('0 days 02:10:15'), Timedelta('0 days 02:17:11.333000')], [16, Timedelta('0 days 02:19:47'), Timedelta('0 days 02:24:27.666000')], [17, Timedelta('0 days 02:25:39.666000'), None], [18, Timedelta('0 days 02:32:16.333000'), None], [19, Timedelta('0 days 02:41:50.333000'), Timedelta('0 days 02:48:23.666000')]]
+Streamer: 2022-01-26_S1_irepptar_1276593830 -- Nr of critical lobbies not existing:0 -- []
+Streamer: 2022-01-26_S1_irepptar_1276593830 -- [[1, Timedelta('0 days 00:06:48.666000'), Timedelta('0 days 00:15:13.666000')], [2, Timedelta('0 days 00:21:44'), Timedelta('0 days 00:25:30')], [3, Timedelta('0 days 00:26:38'), Timedelta('0 days 00:34:01.333000')], [4, Timedelta('0 days 00:35:17.666000'), Timedelta('0 days 00:45:45.333000')], [5, Timedelta('0 days 00:49:14.333000'), Timedelta('0 days 00:54:59.333000')], [6, Timedelta('0 days 00:55:50.333000'), Timedelta('0 days 01:02:45')], [7, Timedelta('0 days 01:03:58.666000'), Timedelta('0 days 01:05:40')], [8, Timedelta('0 days 01:06:42.333000'), Timedelta('0 days 01:15:19')], [9, Timedelta('0 days 01:16:43.333000'), Timedelta('0 days 01:25:07.666000')], [10, Timedelta('0 days 01:26:21.333000'), Timedelta('0 days 01:37:30')], [11, Timedelta('0 days 01:39:10.333000'), Timedelta('0 days 01:44:37.666000')], [12, Timedelta('0 days 01:52:44.333000'), Timedelta('0 days 01:58:49.333000')], [13, Timedelta('0 days 01:59:48.333000'), None], [14, Timedelta('0 days 02:03:18.333000'), None], [15, Timedelta('0 days 02:10:43.666000'), Timedelta('0 days 02:17:40.333000')], [16, Timedelta('0 days 02:20:15.666000'), Timedelta('0 days 02:24:56.666000')], [17, Timedelta('0 days 02:26:08.333000'), Timedelta('0 days 02:31:28.666000')], [18, Timedelta('0 days 02:32:45'), Timedelta('0 days 02:41:18')], [19, Timedelta('0 days 02:42:19.666000'), Timedelta('0 days 02:48:52.666000')]]
+Streamer: 2022-01-26_S1_br00d_1276931103 -- Nr of critical lobbies not existing:0 -- []
+Streamer: 2022-01-26_S1_br00d_1276931103 -- [[1, Timedelta('0 days 00:04:18.666000'), None], [2, Timedelta('0 days 00:19:14'), Timedelta('0 days 00:23:00')], [3, None, Timedelta('0 days 00:31:31')], [4, Timedelta('0 days 00:32:47.666000'), Timedelta('0 days 00:43:15')], [5, Timedelta('0 days 00:46:44'), Timedelta('0 days 00:52:29')], [6, None, Timedelta('0 days 01:00:15')], [7, Timedelta('0 days 01:01:28.666000'), None], [8, Timedelta('0 days 01:04:12.333000'), Timedelta('0 days 01:12:48.666000')], [9, Timedelta('0 days 01:14:13.333000'), Timedelta('0 days 01:22:37.333000')], [10, Timedelta('0 days 01:23:51'), Timedelta('0 days 01:35:00')], [11, Timedelta('0 days 01:36:41.333000'), Timedelta('0 days 01:42:07.333000')], [12, Timedelta('0 days 01:50:14'), None], [13, Timedelta('0 days 01:57:19.333000'), Timedelta('0 days 01:59:26')], [14, Timedelta('0 days 02:00:48'), Timedelta('0 days 02:06:51.333000')], [15, Timedelta('0 days 02:08:13.333000'), Timedelta('0 days 02:15:08.666000')], [16, Timedelta('0 days 02:17:45.666000'), Timedelta('0 days 02:22:26.333000')], [17, Timedelta('0 days 02:23:38.333000'), Timedelta('0 days 02:28:58.333000')], [18, Timedelta('0 days 02:30:14.666000'), Timedelta('0 days 02:38:47.666000')], [19, Timedelta('0 days 02:39:49.333000'), Timedelta('0 days 02:46:22.333000')]]
+Streamer: 2022-01-26_S1_aribunnie_1276931864 -- Nr of critical lobbies not existing:0 -- []
+Streamer: 2022-01-26_S1_aribunnie_1276931864 -- [[1, Timedelta('0 days 00:00:48.666000'), Timedelta('0 days 00:09:12')], [2, Timedelta('0 days 00:15:43.666000'), Timedelta('0 days 00:19:27.666000')], [3, Timedelta('0 days 00:20:37.666000'), Timedelta('0 days 00:27:59')], [4, Timedelta('0 days 00:29:16.666000'), Timedelta('0 days 00:39:43')], [5, Timedelta('0 days 00:43:13.333000'), Timedelta('0 days 00:48:56.666000')], [6, Timedelta('0 days 00:49:49.666000'), Timedelta('0 days 00:56:43')], [7, Timedelta('0 days 00:57:57.666000'), Timedelta('0 days 00:59:37.666000')], [8, Timedelta('0 days 01:00:41.666000'), Timedelta('0 days 01:09:16.666000')], [9, Timedelta('0 days 01:10:42.666000'), Timedelta('0 days 01:19:05.333000')], [10, Timedelta('0 days 01:20:20.666000'), Timedelta('0 days 01:31:27.666000')], [11, Timedelta('0 days 01:33:10.666000'), Timedelta('0 days 01:38:35.333000')], [12, Timedelta('0 days 01:46:43.333000'), Timedelta('0 days 01:52:47')], [13, Timedelta('0 days 01:53:48'), Timedelta('0 days 01:55:53.666000')], [14, Timedelta('0 days 01:57:17'), Timedelta('0 days 02:03:34.666000')], [15, Timedelta('0 days 02:04:43.666000'), None], [16, Timedelta('0 days 02:14:14.666000'), Timedelta('0 days 02:18:54.333000')], [17, Timedelta('0 days 02:20:07.333000'), Timedelta('0 days 02:25:26.333000')], [18, Timedelta('0 days 02:26:44'), Timedelta('0 days 02:35:15.666000')], [19, Timedelta('0 days 02:36:18.666000'), Timedelta('0 days 02:42:50')]]

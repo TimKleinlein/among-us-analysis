@@ -1,0 +1,6 @@
+SESSION: 2022-05-22_S1
+
+
+
+
+An error occurred: Cannot set a DataFrame with multiple columns to the single column start_date

@@ -1,0 +1,61 @@
+SESSION: 2022-02-02_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-02_S1_karacorvus_1284623042: Lobbies numbers not consecutive: None and 1
+Streamer: 2022-02-02_S1_karacorvus_1284623042: Lobbies numbers not consecutive: 3 and 5
+Streamer: 2022-02-02_S1_karacorvus_1284623042: Lobbies numbers not consecutive: 8 and 10
+Streamer: 2022-02-02_S1_karacorvus_1284623042: Lobbies numbers not consecutive: 13 and None
+Streamer: 2022-02-02_S1_karacorvus_1284623042: Lobbies numbers not consecutive: None and 13
+Streamer: 2022-02-02_S1_aribunnie_1284774685: Lobbies numbers not consecutive: None and 1
+Streamer: 2022-02-02_S1_aribunnie_1284774685: Lobbies numbers not consecutive: 1 and None
+Streamer: 2022-02-02_S1_aribunnie_1284774685: Lobbies numbers not consecutive: None and 1
+Streamer: 2022-02-02_S1_aribunnie_1284774685: Lobbies numbers not consecutive: 6 and 8
+Streamer: 2022-02-02_S1_vikramafc_1284627871: Lobbies numbers not consecutive: 3 and 5
+Streamer: 2022-02-02_S1_vikramafc_1284627871: Lobbies numbers not consecutive: 5 and 4
+Streamer: 2022-02-02_S1_vikramafc_1284627871: Lobbies numbers not consecutive: 8 and 10
+Streamer: 2022-02-02_S1_vikramafc_1284627871: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-02-02_S1_vikramafc_1284627871: Lobbies numbers not consecutive: 17 and None
+Streamer: 2022-02-02_S1_skadj_1284774676: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-02_S1_skadj_1284774676: Lobbies numbers not consecutive: 3 and 5
+Streamer: 2022-02-02_S1_skadj_1284774676: Lobbies numbers not consecutive: 14 and 14
+Streamer: 2022-02-02_S1_skadj_1284774676: Lobbies numbers not consecutive: 14 and 14
+Streamer: 2022-02-02_S1_skadj_1284774676: Lobbies numbers not consecutive: 15 and 17
+Streamer: 2022-02-02_S1_dooleynotedgaming_1284769229: Lobbies numbers not consecutive: 15 and 15
+Streamer: 2022-02-02_S1_chilledchaos_1284766735: Lobbies numbers not consecutive: None and 2
+Streamer: 2022-02-02_S1_tenmamaemi_1284702574: Lobbies numbers not consecutive: 3 and 6
+Streamer: 2022-02-02_S1_tenmamaemi_1284702574: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-02_S1_tenmamaemi_1284702574: Lobbies numbers not consecutive: 12 and None
+Streamer: 2022-02-02_S1_tenmamaemi_1284702574: Lobbies numbers not consecutive: None and 14
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-02-02 21:12:40 - End: 2022-02-02 21:26:02.333000
+Lobby has no trustworthy times: 2 - Start: 2022-02-02 21:26:40.666000 - End: 2022-02-02 21:30:21.666000
+Lobby has no trustworthy times: 4 - Start: 2022-02-02 21:44:27.283000 - End: 2022-02-02 21:48:40.950000
+Lobby has no trustworthy times: 5 - Start: 2022-02-02 21:49:38.666000 - End: 2022-02-02 21:55:43.666000
+Lobby has no trustworthy times: 8 - Start: 2022-02-02 22:24:36 - End: 2022-02-02 22:33:54
+Lobby has no trustworthy times: 9 - Start: 2022-02-02 22:34:51 - End: 2022-02-02 22:39:47.333000
+Lobby has no trustworthy times: 10 - Start: 2022-02-02 22:40:32.666000 - End: 2022-02-02 22:48:28.666000
+Lobby has no trustworthy times: 13 - Start: 2022-02-02 23:07:21 - End: 2022-02-02 23:15:25
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-02_S1_aribunnie_1284774685']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-02_S1_aribunnie_1284774685 -- Nr of critical lobbies not existing:0 -- [[1, Timedelta('0 days 00:08:41.733000'), None], [2, None, Timedelta('0 days 00:22:10.300000')], [4, Timedelta('0 days 00:36:13.283000'), Timedelta('0 days 00:40:26.950000')], [5, Timedelta('0 days 00:41:38.950000'), Timedelta('0 days 00:47:32.283000')], [8, None, Timedelta('0 days 01:25:42.483000')], [9, None, Timedelta('0 days 01:31:36.816000')], [10, None, Timedelta('0 days 01:40:17.150000')], [13, Timedelta('0 days 01:59:12.100000'), Timedelta('0 days 02:07:13.433000')]]
+Streamer: 2022-02-02_S1_aribunnie_1284774685 -- [[1, Timedelta('0 days 00:08:41.733000'), None], [2, None, Timedelta('0 days 00:22:10.300000')], [3, None, Timedelta('0 days 00:30:57.283000')], [4, Timedelta('0 days 00:36:13.283000'), Timedelta('0 days 00:40:26.950000')], [5, Timedelta('0 days 00:41:38.950000'), Timedelta('0 days 00:47:32.283000')], [6, Timedelta('0 days 00:48:24.283000'), Timedelta('0 days 01:00:09.283000')], [8, None, Timedelta('0 days 01:25:42.483000')], [9, None, Timedelta('0 days 01:31:36.816000')], [10, None, Timedelta('0 days 01:40:17.150000')], [11, None, Timedelta('0 days 01:50:00.100000')], [12, None, Timedelta('0 days 01:57:34.766000')], [13, Timedelta('0 days 01:59:12.100000'), Timedelta('0 days 02:07:13.433000')], [14, None, Timedelta('0 days 02:16:21.766000')], [15, Timedelta('0 days 02:17:25.433000'), Timedelta('0 days 02:26:11.100000')], [16, Timedelta('0 days 02:34:44.766000'), Timedelta('0 days 02:39:41.100000')], [17, Timedelta('0 days 02:41:46.766000'), Timedelta('0 days 02:49:17.433000')]]

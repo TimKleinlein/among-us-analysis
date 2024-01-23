@@ -1,0 +1,43 @@
+SESSION: 2022-02-19_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-19_S1_brizzynewindsong_1303521364: Lobbies numbers not consecutive: 5 and 7
+Streamer: 2022-02-19_S1_brizzynewindsong_1303521364: Lobbies numbers not consecutive: 15 and 15
+Streamer: 2022-02-19_S1_brizzynewindsong_1303521364: Lobbies numbers not consecutive: 15 and 15
+Streamer: 2022-02-19_S1_karacorvus_1303411073: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-19_S1_ressnie_1303506638: Lobbies numbers not consecutive: 1 and 1
+Streamer: 2022-02-19_S1_ressnie_1303506638: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-19_S1_ressnie_1303506638: Lobbies numbers not consecutive: 5 and 7
+Streamer: 2022-02-19_S1_willyutv_1303482578: Lobbies numbers not consecutive: 19 and None
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 2 - Start: 2022-02-19 20:29:48.333000 - End: 2022-02-19 20:31:21.100000
+Lobby has no trustworthy times: 4 - Start: 2022-02-19 20:42:01.666000 - End: 2022-02-19 20:48:24.333000
+Lobby has no trustworthy times: 6 - Start: 2022-02-19 21:01:02.666000 - End: 2022-02-19 21:10:35.666000
+Lobby has no trustworthy times: 9 - Start: 2022-02-19 21:33:06 - End: 2022-02-19 21:35:24.333000
+Lobby has no trustworthy times: 10 - Start: 2022-02-19 21:35:34 - End: 2022-02-19 21:42:34
+Lobby has no trustworthy times: 12 - Start: 2022-02-19 21:58:53.133000 - End: 2022-02-19 22:09:33.466000
+Lobby has no trustworthy times: 16 - Start: 2022-02-19 22:42:21.133000 - End: 2022-02-19 22:46:42.466000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-19_S1_willyutv_1303482578']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-19_S1_willyutv_1303482578 -- Nr of critical lobbies not existing:0 -- [[2, Timedelta('0 days 00:21:10.333000'), Timedelta('0 days 00:22:57.333000')], [4, Timedelta('0 days 00:33:23.666000'), Timedelta('0 days 00:39:48.333000')], [6, None, Timedelta('0 days 01:02:13.333000')], [9, None, Timedelta('0 days 01:27:18')], [10, None, Timedelta('0 days 01:34:28')], [12, None, Timedelta('0 days 02:01:13.333000')], [16, None, Timedelta('0 days 02:38:07')]]
+Streamer: 2022-02-19_S1_willyutv_1303482578 -- [[1, None, Timedelta('0 days 00:08:35')], [2, Timedelta('0 days 00:21:10.333000'), Timedelta('0 days 00:22:57.333000')], [3, Timedelta('0 days 00:29:27.333000'), Timedelta('0 days 00:31:56.666000')], [4, Timedelta('0 days 00:33:23.666000'), Timedelta('0 days 00:39:48.333000')], [5, None, Timedelta('0 days 00:50:23.666000')], [6, None, Timedelta('0 days 01:02:13.333000')], [7, Timedelta('0 days 01:06:08.333000'), Timedelta('0 days 01:14:23.333000')], [8, None, Timedelta('0 days 01:23:15.333000')], [9, None, Timedelta('0 days 01:27:18')], [10, None, Timedelta('0 days 01:34:28')], [11, None, Timedelta('0 days 01:48:51.333000')], [12, None, Timedelta('0 days 02:01:13.333000')], [13, Timedelta('0 days 02:02:02'), Timedelta('0 days 02:10:11.666000')], [14, Timedelta('0 days 02:11:04.333000'), Timedelta('0 days 02:21:21.333000')], [15, Timedelta('0 days 02:22:21.333000'), Timedelta('0 days 02:32:48')], [16, None, Timedelta('0 days 02:38:07')], [17, Timedelta('0 days 02:39:06.666000'), Timedelta('0 days 02:43:19.666000')], [18, Timedelta('0 days 02:45:06'), Timedelta('0 days 02:50:28.666000')], [19, Timedelta('0 days 02:51:07.333000'), Timedelta('0 days 02:57:23.666000')]]

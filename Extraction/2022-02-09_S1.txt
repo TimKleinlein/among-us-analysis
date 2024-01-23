@@ -1,0 +1,51 @@
+SESSION: 2022-02-09_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-09_S1_karacorvus_1292697393: Lobbies numbers not consecutive: 1 and None
+Streamer: 2022-02-09_S1_karacorvus_1292697393: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-09_S1_karacorvus_1292697393: Lobbies numbers not consecutive: None and 2
+Streamer: 2022-02-09_S1_ozzaworld_1292671974: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-09_S1_ozzaworld_1292671974: Lobbies numbers not consecutive: None and 3
+Streamer: 2022-02-09_S1_ozzaworld_1292671974: Lobbies numbers not consecutive: 3 and 3
+Streamer: 2022-02-09_S1_skadj_1292740157: Lobbies numbers not consecutive: 11 and 13
+Streamer: 2022-02-09_S1_x33n_1292747969: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-09_S1_x33n_1292747969: Lobbies numbers not consecutive: 3 and 3
+Streamer: 2022-02-09_S1_reenyy_1292921134: Lobbies numbers not consecutive: 16 and 16
+Streamer: 2022-02-09_S1_jvckk_1292749915: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-09_S1_dooleynotedgaming_1292731216: Lobbies numbers not consecutive: 1 and None
+Streamer: 2022-02-09_S1_dooleynotedgaming_1292731216: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-09_S1_dooleynotedgaming_1292731216: Lobbies numbers not consecutive: None and 3
+Streamer: 2022-02-09_S1_dooleynotedgaming_1292731216: Lobbies numbers not consecutive: 13 and 15
+Streamer: 2022-02-09_S1_dooleynotedgaming_1292731216: Lobbies numbers not consecutive: 15 and 17
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 8 - Start: 2022-02-09 22:31:11.333000 - End: 2022-02-09 22:39:59
+Lobby has no trustworthy times: 9 - Start: 2022-02-09 22:40:55.333000 - End: 2022-02-09 22:52:24.666000
+Lobby has no trustworthy times: 13 - Start: 2022-02-09 23:21:20 - End: 2022-02-09 23:27:53.333000
+Lobby has no trustworthy times: 14 - Start: 2022-02-09 23:28:29.800000 - End: 2022-02-09 23:41:13.533000
+Lobby has no trustworthy times: 17 - Start: 2022-02-10 00:09:20 - End: 2022-02-10 00:12:52.333000
+
+
+
+
+Streamer has no trustworthy times: 2022-02-09_S1_reenyy_1292921134 - Start time: 7   2022-02-09 23:54:21
+Name: start_date, dtype: datetime64[ns]
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-09_S1_karacorvus_1292697393']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-09_S1_karacorvus_1292697393 -- Nr of critical lobbies not existing:0 -- [[8, None, Timedelta('0 days 01:30:53.666000')], [9, Timedelta('0 days 01:31:50.333000'), Timedelta('0 days 01:43:19.666000')], [13, Timedelta('0 days 02:16:16'), Timedelta('0 days 02:18:48.666000')], [14, None, Timedelta('0 days 02:32:09')], [17, Timedelta('0 days 03:00:15'), Timedelta('0 days 03:03:47.333000')]]
+Streamer: 2022-02-09_S1_karacorvus_1292697393 -- [[1, Timedelta('0 days 00:04:22.666000'), Timedelta('0 days 00:13:01.333000')], [2, Timedelta('0 days 00:20:15'), Timedelta('0 days 00:25:15')], [3, Timedelta('0 days 00:25:54.333000'), Timedelta('0 days 00:30:07.333000')], [4, Timedelta('0 days 00:30:32.666000'), Timedelta('0 days 00:46:24.666000')], [5, Timedelta('0 days 00:47:40.666000'), Timedelta('0 days 00:57:18')], [6, None, Timedelta('0 days 01:12:45.333000')], [7, Timedelta('0 days 01:16:47'), Timedelta('0 days 01:20:34')], [8, None, Timedelta('0 days 01:30:53.666000')], [9, Timedelta('0 days 01:31:50.333000'), Timedelta('0 days 01:43:19.666000')], [10, None, Timedelta('0 days 01:56:55.666000')], [11, None, Timedelta('0 days 02:03:25.333000')], [12, Timedelta('0 days 02:04:14.333000'), Timedelta('0 days 02:10:57')], [13, Timedelta('0 days 02:16:16'), Timedelta('0 days 02:18:48.666000')], [14, None, Timedelta('0 days 02:32:09')], [15, Timedelta('0 days 02:33:06.333000'), Timedelta('0 days 02:44:46')], [16, None, Timedelta('0 days 02:49:33.333000')], [17, Timedelta('0 days 03:00:15'), Timedelta('0 days 03:03:47.333000')]]

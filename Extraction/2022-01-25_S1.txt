@@ -1,0 +1,43 @@
+SESSION: 2022-01-25_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-01-25_S1_vikramafc_1275734951: Lobbies numbers not consecutive: 3 and 6
+Streamer: 2022-01-25_S1_vikramafc_1275734951: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-01-25_S1_irepptar_1275423890: Lobbies numbers not consecutive: 4 and 7
+Streamer: 2022-01-25_S1_irepptar_1275423890: Lobbies numbers not consecutive: 9 and None
+Streamer: 2022-01-25_S1_irepptar_1275423890: Lobbies numbers not consecutive: None and 11
+Streamer: 2022-01-25_S1_jvckk_1275839756: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-01-25_S1_br00d_1275652316: Lobbies numbers not consecutive: 6 and None
+Streamer: 2022-01-25_S1_br00d_1275652316: Lobbies numbers not consecutive: None and 8
+Streamer: 2022-01-25_S1_aribunnie_1275835844: Lobbies numbers not consecutive: 3 and 3
+Streamer: 2022-01-25_S1_aribunnie_1275835844: Lobbies numbers not consecutive: 3 and 3
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 5 - Start: 2022-01-25 21:54:30.333000 - End: 2022-01-25 22:07:59.700000
+Lobby has no trustworthy times: 7 - Start: 2022-01-25 22:22:35 - End: 2022-01-25 22:34:00
+Lobby has no trustworthy times: 10 - Start: 2022-01-25 23:06:21 - End: 2022-01-25 23:13:49.400000
+Lobby has no trustworthy times: 13 - Start: 2022-01-25 23:30:23.733000 - End: 2022-01-25 23:37:09.733000
+Lobby has no trustworthy times: 15 - Start: 2022-01-25 23:46:33.333000 - End: 2022-01-25 23:51:47.333000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-01-25_S1_aribunnie_1275835844']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-01-25_S1_aribunnie_1275835844 -- Nr of critical lobbies not existing:0 -- [[5, None, Timedelta('0 days 01:01:53')], [7, None, Timedelta('0 days 01:27:58.333000')], [10, None, Timedelta('0 days 02:07:41.333000')], [13, None, Timedelta('0 days 02:31:02.666000')], [15, None, Timedelta('0 days 02:45:45')]]
+Streamer: 2022-01-25_S1_aribunnie_1275835844 -- [[1, Timedelta('0 days 00:02:22'), Timedelta('0 days 00:12:15.666000')], [2, Timedelta('0 days 00:13:15.333000'), Timedelta('0 days 00:20:54.666000')], [3, Timedelta('0 days 00:21:50.333000'), None], [4, Timedelta('0 days 00:35:02.666000'), Timedelta('0 days 00:47:43.333000')], [5, None, Timedelta('0 days 01:01:53')], [6, Timedelta('0 days 01:02:42'), Timedelta('0 days 01:14:52.666000')], [7, None, Timedelta('0 days 01:27:58.333000')], [8, None, Timedelta('0 days 01:39:36')], [9, None, Timedelta('0 days 01:52:02')], [10, None, Timedelta('0 days 02:07:41.333000')], [11, Timedelta('0 days 02:08:02'), Timedelta('0 days 02:15:43.333000')], [12, Timedelta('0 days 02:16:37'), Timedelta('0 days 02:21:42.666000')], [13, None, Timedelta('0 days 02:31:02.666000')], [14, Timedelta('0 days 02:31:53.666000'), Timedelta('0 days 02:39:52')], [15, None, Timedelta('0 days 02:45:45')], [16, Timedelta('0 days 02:46:46.333000'), Timedelta('0 days 02:52:39')]]

@@ -1,0 +1,42 @@
+SESSION: 2022-05-19_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-05-19_S1_taydertot_1488384900: Lobbies numbers not consecutive: 4 and 6
+Streamer: 2022-05-19_S1_taydertot_1488384900: Lobbies numbers not consecutive: 12 and 14
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-05-19 20:12:03.666000 - End: 2022-05-19 20:33:59.666000
+Lobby has no trustworthy times: 2 - Start: 2022-05-19 20:35:20.333000 - End: 2022-05-19 20:43:29.333000
+Lobby has no trustworthy times: 3 - Start: 2022-05-19 20:44:03.666000 - End: 2022-05-19 20:46:35
+Lobby has no trustworthy times: 7 - Start: 2022-05-19 21:16:51 - End: 2022-05-19 21:29:52.983000
+Lobby has no trustworthy times: 10 - Start: 2022-05-19 21:46:46.716000 - End: 2022-05-19 21:54:33.383000
+Lobby has no trustworthy times: 11 - Start: 2022-05-19 21:55:25.666000 - End: 2022-05-19 21:58:57
+Lobby has no trustworthy times: 12 - Start: 2022-05-19 21:59:16 - End: 2022-05-19 22:08:49
+Lobby has no trustworthy times: 13 - Start: 2022-05-19 22:10:27.666000 - End: 2022-05-19 22:18:08
+Lobby has no trustworthy times: 17 - Start: 2022-05-19 22:37:28.333000 - End: 2022-05-19 22:42:59.333000
+Lobby has no trustworthy times: 19 - Start: 2022-05-19 22:49:40.666000 - End: 2022-05-19 22:52:30.333000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-05-19_S1_br00d_1488152742', '2022-05-19_S1_jayfletcher88_1488115441']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-05-19_S1_br00d_1488152742 -- Nr of critical lobbies not existing:0 -- [[1, Timedelta('0 days 00:02:41'), Timedelta('0 days 00:13:51.333000')], [2, None, Timedelta('0 days 00:23:22.666000')], [3, Timedelta('0 days 00:23:58.666000'), Timedelta('0 days 00:26:30')], [7, None, Timedelta('0 days 01:09:43.666000')], [10, Timedelta('0 days 01:31:48'), Timedelta('0 days 01:34:27.666000')], [11, Timedelta('0 days 01:35:20.666000'), Timedelta('0 days 01:38:52')], [12, Timedelta('0 days 01:41:29.333000'), None], [13, Timedelta('0 days 01:50:22.666000'), Timedelta('0 days 01:58:03')], [17, Timedelta('0 days 02:17:23.333000'), Timedelta('0 days 02:22:54.333000')], [19, Timedelta('0 days 02:29:35.666000'), Timedelta('0 days 02:32:25.333000')]]
+Streamer: 2022-05-19_S1_br00d_1488152742 -- [[1, Timedelta('0 days 00:02:41'), Timedelta('0 days 00:13:51.333000')], [2, None, Timedelta('0 days 00:23:22.666000')], [3, Timedelta('0 days 00:23:58.666000'), Timedelta('0 days 00:26:30')], [4, Timedelta('0 days 00:28:41.666000'), None], [5, Timedelta('0 days 00:36:48.666000'), Timedelta('0 days 00:46:23.333000')], [6, Timedelta('0 days 00:47:01.666000'), Timedelta('0 days 00:56:02.333000')], [7, None, Timedelta('0 days 01:09:43.666000')], [8, Timedelta('0 days 01:11:09.666000'), Timedelta('0 days 01:15:26.333000')], [9, Timedelta('0 days 01:16:50'), Timedelta('0 days 01:25:49.333000')], [10, Timedelta('0 days 01:31:48'), Timedelta('0 days 01:34:27.666000')], [11, Timedelta('0 days 01:35:20.666000'), Timedelta('0 days 01:38:52')], [12, Timedelta('0 days 01:41:29.333000'), None], [13, Timedelta('0 days 01:50:22.666000'), Timedelta('0 days 01:58:03')], [14, Timedelta('0 days 01:59:45.333000'), Timedelta('0 days 02:06:40')], [15, Timedelta('0 days 02:07:25.333000'), Timedelta('0 days 02:12:04.666000')], [16, Timedelta('0 days 02:12:35'), Timedelta('0 days 02:14:25')], [17, Timedelta('0 days 02:17:23.333000'), Timedelta('0 days 02:22:54.333000')], [18, Timedelta('0 days 02:23:30.666000'), Timedelta('0 days 02:28:55.333000')], [19, Timedelta('0 days 02:29:35.666000'), Timedelta('0 days 02:32:25.333000')], [20, Timedelta('0 days 02:32:57.666000'), Timedelta('0 days 02:39:32.666000')], [21, Timedelta('0 days 02:40:15'), Timedelta('0 days 02:47:47.333000')]]
+Streamer: 2022-05-19_S1_jayfletcher88_1488115441 -- Nr of critical lobbies not existing:0 -- [[1, None, Timedelta('0 days 00:19:06.333000')], [2, None, Timedelta('0 days 00:28:27.333000')], [3, None, Timedelta('0 days 00:31:42')], [7, None, Timedelta('0 days 01:15:00')], [10, None, Timedelta('0 days 01:39:46.333000')], [11, None, Timedelta('0 days 01:44:03.666000')], [12, Timedelta('0 days 01:44:16'), Timedelta('0 days 01:53:49')], [13, Timedelta('0 days 02:02:03'), Timedelta('0 days 02:03:15')], [17, None, Timedelta('0 days 02:28:06.333000')], [19, None, Timedelta('0 days 02:37:37.333000')]]
+Streamer: 2022-05-19_S1_jayfletcher88_1488115441 -- [[1, None, Timedelta('0 days 00:19:06.333000')], [2, None, Timedelta('0 days 00:28:27.333000')], [3, None, Timedelta('0 days 00:31:42')], [4, Timedelta('0 days 00:34:07.666000'), Timedelta('0 days 00:40:54.333000')], [5, Timedelta('0 days 00:41:59.333000'), Timedelta('0 days 00:51:35')], [6, Timedelta('0 days 00:52:12.333000'), Timedelta('0 days 01:01:14')], [7, None, Timedelta('0 days 01:15:00')], [8, Timedelta('0 days 01:16:20.666000'), Timedelta('0 days 01:20:38.333000')], [9, None, Timedelta('0 days 01:31:01')], [10, None, Timedelta('0 days 01:39:46.333000')], [11, None, Timedelta('0 days 01:44:03.666000')], [12, Timedelta('0 days 01:44:16'), Timedelta('0 days 01:53:49')], [13, Timedelta('0 days 02:02:03'), Timedelta('0 days 02:03:15')], [14, Timedelta('0 days 02:04:56.333000'), Timedelta('0 days 02:11:52.666000')], [15, None, Timedelta('0 days 02:17:16.666000')], [16, None, Timedelta('0 days 02:19:37.333000')], [17, None, Timedelta('0 days 02:28:06.333000')], [18, Timedelta('0 days 02:28:41.333000'), Timedelta('0 days 02:33:58.666000')], [19, None, Timedelta('0 days 02:37:37.333000')], [20, None, Timedelta('0 days 02:44:44.666000')], [21, Timedelta('0 days 02:45:25.666000'), Timedelta('0 days 02:52:59.333000')]]

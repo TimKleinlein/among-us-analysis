@@ -1,0 +1,61 @@
+SESSION: 2022-02-26_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-26_S1_karacorvus_1408961582: Lobbies numbers not consecutive: None and 2
+Streamer: 2022-02-26_S1_karacorvus_1408961582: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-02-26_S1_karacorvus_1408961582: Lobbies numbers not consecutive: 16 and None
+Streamer: 2022-02-26_S1_karacorvus_1408961582: Lobbies numbers not consecutive: None and 18
+Streamer: 2022-02-26_S1_br00d_1409008350: Lobbies numbers not consecutive: 2 and 5
+Streamer: 2022-02-26_S1_br00d_1409008350: Lobbies numbers not consecutive: 16 and 18
+Streamer: 2022-02-26_S1_courtilly_1408976875: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-02-26_S1_jojosolos_1408981494: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-02-26_S1_jojosolos_1408981494: Lobbies numbers not consecutive: 6 and 6
+Streamer: 2022-02-26_S1_jojosolos_1408981494: Lobbies numbers not consecutive: 8 and 10
+Streamer: 2022-02-26_S1_jojosolos_1408981494: Lobbies numbers not consecutive: 16 and None
+Streamer: 2022-02-26_S1_jvckk_1408854534: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-02-26_S1_jvckk_1408854534: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-02-26_S1_jvckk_1408854534: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-02-26_S1_ozzaworld_1408986719: Lobbies numbers not consecutive: 16 and 18
+Streamer: 2022-02-26_S1_skadj_1408984068: Lobbies numbers not consecutive: 1 and 3
+Streamer: 2022-02-26_S1_skadj_1408984068: Lobbies numbers not consecutive: 7 and None
+Streamer: 2022-02-26_S1_skadj_1408984068: Lobbies numbers not consecutive: None and 9
+Streamer: 2022-02-26_S1_skadj_1408984068: Lobbies numbers not consecutive: 16 and 18
+Streamer: 2022-02-26_S1_uneasypeasy_1408979614: Lobbies numbers not consecutive: 1 and 3
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-02-26 20:13:02.333000 - End: 2022-02-26 20:18:55.666000
+Lobby has no trustworthy times: 3 - Start: 2022-02-26 20:26:37.666000 - End: 2022-02-26 20:31:33.666000
+Lobby has no trustworthy times: 7 - Start: 2022-02-26 20:59:50.333000 - End: 2022-02-26 21:14:37
+Lobby has no trustworthy times: 10 - Start: 2022-02-26 21:34:23.333000 - End: 2022-02-26 21:41:20.333000
+Lobby has no trustworthy times: 12 - Start: 2022-02-26 21:55:21.666000 - End: 2022-02-26 22:02:13.333000
+Lobby has no trustworthy times: 17 - Start: 2022-02-26 22:49:04 - End: 2022-02-26 22:51:00.333000
+Lobby has no trustworthy times: 18 - Start: 2022-02-26 22:53:09.666000 - End: 2022-02-26 22:59:40.333000
+
+
+
+
+Streamer has no trustworthy times: 2022-02-26_S1_jojosolos_1408981494 - Start time: 3   2022-02-26 20:11:20
+Name: start_date, dtype: datetime64[ns]
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-26_S1_karacorvus_1408961582', '2022-02-26_S1_courtilly_1408976875', '2022-02-26_S1_ozzaworld_1408986719']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-26_S1_karacorvus_1408961582 -- Nr of critical lobbies not existing:3 -- [[7, None, Timedelta('0 days 01:01:57')], [10, None, Timedelta('0 days 01:28:51')], [12, Timedelta('0 days 01:42:51'), Timedelta('0 days 01:49:34.666000')], [18, None, Timedelta('0 days 02:47:00.666000')]]
+Streamer: 2022-02-26_S1_karacorvus_1408961582 -- [[2, Timedelta('0 days 00:07:42.333000'), Timedelta('0 days 00:18:54')], [4, Timedelta('0 days 00:19:50'), Timedelta('0 days 00:28:04.666000')], [5, Timedelta('0 days 00:28:56'), Timedelta('0 days 00:35:49')], [6, Timedelta('0 days 00:36:52.333000'), Timedelta('0 days 00:48:19.666000')], [7, None, Timedelta('0 days 01:01:57')], [8, Timedelta('0 days 01:02:55.333000'), Timedelta('0 days 01:09:14.333000')], [9, Timedelta('0 days 01:10:25.333000'), Timedelta('0 days 01:20:39.666000')], [10, None, Timedelta('0 days 01:28:51')], [11, Timedelta('0 days 01:33:00.333000'), Timedelta('0 days 01:41:45')], [12, Timedelta('0 days 01:42:51'), Timedelta('0 days 01:49:34.666000')], [13, Timedelta('0 days 01:57:19'), Timedelta('0 days 02:03:01.666000')], [14, Timedelta('0 days 02:04:02'), Timedelta('0 days 02:19:58.666000')], [15, None, Timedelta('0 days 02:23:51.666000')], [16, Timedelta('0 days 02:24:17'), Timedelta('0 days 02:31:28.666000')], [18, None, Timedelta('0 days 02:47:00.666000')]]
+Streamer: 2022-02-26_S1_courtilly_1408976875 -- Nr of critical lobbies not existing:1 -- [[1, Timedelta('0 days 00:03:55.333000'), Timedelta('0 days 00:10:04.333000')], [7, None, Timedelta('0 days 01:05:29.333000')], [10, None, Timedelta('0 days 01:32:13')], [12, Timedelta('0 days 01:46:14.666000'), Timedelta('0 days 01:53:06.333000')], [17, Timedelta('0 days 02:39:57'), Timedelta('0 days 02:41:53.333000')], [18, None, Timedelta('0 days 02:50:32.666000')]]
+Streamer: 2022-02-26_S1_courtilly_1408976875 -- [[1, Timedelta('0 days 00:03:55.333000'), Timedelta('0 days 00:10:04.333000')], [2, Timedelta('0 days 00:11:16.333000'), Timedelta('0 days 00:22:26.333000')], [4, Timedelta('0 days 00:23:24'), Timedelta('0 days 00:31:37')], [5, Timedelta('0 days 00:32:30'), Timedelta('0 days 00:39:21.333000')], [6, Timedelta('0 days 00:40:07.666000'), Timedelta('0 days 00:51:45')], [7, None, Timedelta('0 days 01:05:29.333000')], [8, Timedelta('0 days 01:06:30'), Timedelta('0 days 01:12:46.333000')], [9, None, Timedelta('0 days 01:24:12')], [10, None, Timedelta('0 days 01:32:13')], [11, Timedelta('0 days 01:33:14.333000'), Timedelta('0 days 01:45:17')], [12, Timedelta('0 days 01:46:14.666000'), Timedelta('0 days 01:53:06.333000')], [13, Timedelta('0 days 01:54:05'), Timedelta('0 days 02:06:21.333000')], [14, Timedelta('0 days 02:15:09.333000'), Timedelta('0 days 02:23:30.666000')], [15, Timedelta('0 days 02:24:01.666000'), Timedelta('0 days 02:27:23.666000')], [16, None, Timedelta('0 days 02:35:00.666000')], [17, Timedelta('0 days 02:39:57'), Timedelta('0 days 02:41:53.333000')], [18, None, Timedelta('0 days 02:50:32.666000')]]
+Streamer: 2022-02-26_S1_ozzaworld_1408986719 -- Nr of critical lobbies not existing:1 -- [[1, None, Timedelta('0 days 00:06:40.333000')], [3, None, Timedelta('0 days 00:19:28')], [7, None, Timedelta('0 days 01:02:10.316000')], [10, Timedelta('0 days 01:21:56.983000'), Timedelta('0 days 01:28:53.983000')], [12, None, Timedelta('0 days 01:49:50.650000')], [18, Timedelta('0 days 02:40:53.983000'), Timedelta('0 days 02:47:18.316000')]]
+Streamer: 2022-02-26_S1_ozzaworld_1408986719 -- [[1, None, Timedelta('0 days 00:06:40.333000')], [2, None, Timedelta('0 days 00:19:15')], [3, None, Timedelta('0 days 00:19:28')], [4, Timedelta('0 days 00:20:05'), Timedelta('0 days 00:28:18.316000')], [5, None, Timedelta('0 days 00:36:02.316000')], [6, Timedelta('0 days 00:37:07.650000'), Timedelta('0 days 00:48:32.650000')], [7, None, Timedelta('0 days 01:02:10.316000')], [8, Timedelta('0 days 01:03:11.650000'), Timedelta('0 days 01:09:27.650000')], [9, Timedelta('0 days 01:10:39.983000'), Timedelta('0 days 01:20:52.983000')], [10, Timedelta('0 days 01:21:56.983000'), Timedelta('0 days 01:28:53.983000')], [11, Timedelta('0 days 01:30:15.983000'), Timedelta('0 days 01:42:01.650000')], [12, None, Timedelta('0 days 01:49:50.650000')], [13, Timedelta('0 days 01:50:46.316000'), Timedelta('0 days 02:03:02.650000')], [14, Timedelta('0 days 02:04:16.983000'), Timedelta('0 days 02:20:11.983000')], [15, Timedelta('0 days 02:21:03.316000'), Timedelta('0 days 02:24:05.316000')], [16, None, Timedelta('0 days 02:31:41.983000')], [18, Timedelta('0 days 02:40:53.983000'), Timedelta('0 days 02:47:18.316000')]]

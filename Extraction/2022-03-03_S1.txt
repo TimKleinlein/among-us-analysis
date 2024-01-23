@@ -1,0 +1,57 @@
+SESSION: 2022-03-03_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-03-03_S1_karacorvus_1414292457: Lobbies numbers not consecutive: 15 and None
+Streamer: 2022-03-03_S1_brizzynewindsong_1414133896: Lobbies numbers not consecutive: 7 and 9
+Streamer: 2022-03-03_S1_brizzynewindsong_1414133896: Lobbies numbers not consecutive: 9 and 11
+Streamer: 2022-03-03_S1_brizzynewindsong_1414133896: Lobbies numbers not consecutive: 12 and None
+Streamer: 2022-03-03_S1_brizzynewindsong_1414133896: Lobbies numbers not consecutive: None and None
+Streamer: 2022-03-03_S1_brizzynewindsong_1414133896: Lobbies numbers not consecutive: None and 13
+Streamer: 2022-03-03_S1_ozzaworld_1414046677: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-03-03_S1_ozzaworld_1414046677: Lobbies numbers not consecutive: 15 and None
+Streamer: 2022-03-03_S1_irepptar_1414043537: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-03-03_S1_skadj_1414299627: Lobbies numbers not consecutive: 14 and 14
+Streamer: 2022-03-03_S1_skadj_1414299627: Lobbies numbers not consecutive: 14 and 14
+Streamer: 2022-03-03_S1_tenmamaemi_1414290075: Lobbies numbers not consecutive: 8 and 12
+Streamer: 2022-03-03_S1_vikramafc_1414219955: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-03-03_S1_vikramafc_1414219955: Lobbies numbers not consecutive: 4 and 7
+Streamer: 2022-03-03_S1_vikramafc_1414219955: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-03-03_S1_zeroyalviking_1414285517: Lobbies numbers not consecutive: 10 and 12
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-03-03 20:13:54.666000 - End: 2022-03-03 20:17:39.333000
+Lobby has no trustworthy times: 2 - Start: 2022-03-03 20:24:11 - End: 2022-03-03 20:29:22.666000
+Lobby has no trustworthy times: 3 - Start: 2022-03-03 20:29:59.316000 - End: 2022-03-03 20:42:53.983000
+Lobby has no trustworthy times: 9 - Start: 2022-03-03 21:33:50.666000 - End: 2022-03-03 21:49:55.666000
+Lobby has no trustworthy times: 13 - Start: 2022-03-03 22:21:41.483000 - End: 2022-03-03 22:38:32.483000
+Lobby has no trustworthy times: 14 - Start: 2022-03-03 22:43:33.333000 - End: 2022-03-03 22:50:10
+Lobby has no trustworthy times: 15 - Start: 2022-03-03 22:50:46.666000 - End: 2022-03-03 22:59:54.666000
+
+
+
+
+Streamer has no trustworthy times: 2022-03-03_S1_vikramafc_1414219955 - Start time: 8   2022-03-03 20:11:00
+Name: start_date, dtype: datetime64[ns]
+Streamer has no trustworthy times: 2022-03-03_S1_zeroyalviking_1414285517 - Start time: 9   2022-03-03 20:12:15
+Name: start_date, dtype: datetime64[ns]
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-03-03_S1_karacorvus_1414292457', '2022-03-03_S1_skadj_1414299627']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-03-03_S1_karacorvus_1414292457 -- Nr of critical lobbies not existing:0 -- [[1, None, Timedelta('0 days 00:04:34.666000')], [2, None, Timedelta('0 days 00:16:13.666000')], [3, None, Timedelta('0 days 00:29:54.333000')], [9, Timedelta('0 days 01:20:45'), Timedelta('0 days 01:36:50.666000')], [13, None, Timedelta('0 days 02:25:54.666000')], [14, None, Timedelta('0 days 02:37:04.666000')], [15, Timedelta('0 days 02:37:56'), Timedelta('0 days 02:47:08')]]
+Streamer: 2022-03-03_S1_karacorvus_1414292457 -- [[1, None, Timedelta('0 days 00:04:34.666000')], [2, None, Timedelta('0 days 00:16:13.666000')], [3, None, Timedelta('0 days 00:29:54.333000')], [4, Timedelta('0 days 00:35:15.666000'), Timedelta('0 days 00:39:11.333000')], [5, Timedelta('0 days 00:43:44.333000'), Timedelta('0 days 00:50:16')], [6, Timedelta('0 days 00:53:43.333000'), Timedelta('0 days 00:57:31.333000')], [7, Timedelta('0 days 00:58:49.666000'), Timedelta('0 days 01:11:45.333000')], [8, None, Timedelta('0 days 01:19:32.666000')], [9, Timedelta('0 days 01:20:45'), Timedelta('0 days 01:36:50.666000')], [10, Timedelta('0 days 01:38:19.666000'), Timedelta('0 days 01:48:13.666000')], [11, None, Timedelta('0 days 01:58:50.333000')], [12, None, Timedelta('0 days 02:08:14')], [13, None, Timedelta('0 days 02:25:54.666000')], [14, None, Timedelta('0 days 02:37:04.666000')], [15, Timedelta('0 days 02:37:56'), Timedelta('0 days 02:47:08')]]
+Streamer: 2022-03-03_S1_skadj_1414299627 -- Nr of critical lobbies not existing:1 -- [[2, Timedelta('0 days 00:05:37'), Timedelta('0 days 00:10:48.666000')], [3, None, Timedelta('0 days 00:24:29.666000')], [9, Timedelta('0 days 01:25:17.150000'), Timedelta('0 days 01:31:24.816000')], [13, Timedelta('0 days 02:15:37.383000'), Timedelta('0 days 02:20:33.050000')], [14, Timedelta('0 days 02:25:12.050000'), None], [15, None, Timedelta('0 days 02:41:31.050000')]]
+Streamer: 2022-03-03_S1_skadj_1414299627 -- [[2, Timedelta('0 days 00:05:37'), Timedelta('0 days 00:10:48.666000')], [3, None, Timedelta('0 days 00:24:29.666000')], [4, Timedelta('0 days 00:26:06'), Timedelta('0 days 00:37:07')], [5, None, Timedelta('0 days 00:44:51')], [6, Timedelta('0 days 00:45:40.333000'), Timedelta('0 days 00:52:06.333000')], [7, Timedelta('0 days 00:53:24'), Timedelta('0 days 01:06:20')], [8, Timedelta('0 days 01:09:47.483000'), Timedelta('0 days 01:14:07.816000')], [9, Timedelta('0 days 01:25:17.150000'), Timedelta('0 days 01:31:24.816000')], [10, None, Timedelta('0 days 01:42:39.050000')], [11, None, Timedelta('0 days 01:53:25.050000')], [12, None, Timedelta('0 days 02:02:48.716000')], [13, Timedelta('0 days 02:15:37.383000'), Timedelta('0 days 02:20:33.050000')], [14, Timedelta('0 days 02:25:12.050000'), None], [15, None, Timedelta('0 days 02:41:31.050000')]]

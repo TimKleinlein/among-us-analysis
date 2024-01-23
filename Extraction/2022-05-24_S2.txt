@@ -1,0 +1,70 @@
+SESSION: 2022-05-24_S2
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: None and 2
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: 3 and 5
+Streamer: 2022-05-24_S2_br00d_1492682575: Lobbies numbers not consecutive: 5 and 7
+Streamer: 2022-05-24_S2_skadj_1492846384: Lobbies numbers not consecutive: 2 and 4
+Streamer: 2022-05-24_S2_skadj_1492846384: Lobbies numbers not consecutive: 4 and 6
+Streamer: 2022-05-24_S2_karacorvus_1492848423: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: 1 and 4
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: 9 and 11
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: 14 and None
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: None and None
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: None and 15
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: 15 and None
+Streamer: 2022-05-24_S2_vikramafc_1492866561: Lobbies numbers not consecutive: None and 17
+Streamer: 2022-05-24_S2_jvckk_1492876223: Lobbies numbers not consecutive: 2 and None
+Streamer: 2022-05-24_S2_jvckk_1492876223: Lobbies numbers not consecutive: None and 4
+Streamer: 2022-05-24_S2_zeroyalviking_1492860062: Lobbies numbers not consecutive: 9 and 11
+Streamer: 2022-05-24_S2_zeroyalviking_1492860062: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-05-24_S2_zeroyalviking_1492860062: Lobbies numbers not consecutive: 17 and 19
+Streamer: 2022-05-24_S2_taydertot_1492887580: Lobbies numbers not consecutive: 4 and 6
+Streamer: 2022-05-24_S2_taydertot_1492887580: Lobbies numbers not consecutive: 6 and 8
+Streamer: 2022-05-24_S2_taydertot_1492887580: Lobbies numbers not consecutive: 9 and 11
+Streamer: 2022-05-24_S2_taydertot_1492887580: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-05-24_S2_hcjustin_1492646230: Lobbies numbers not consecutive: None and 2
+Streamer: 2022-05-24_S2_hcjustin_1492646230: Lobbies numbers not consecutive: 12 and 15
+Streamer: 2022-05-24_S2_hcjustin_1492646230: Lobbies numbers not consecutive: 21 and None
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-05-24 20:14:32 - End: 2022-05-24 20:23:21
+Lobby has no trustworthy times: 4 - Start: 2022-05-24 20:51:30.333000 - End: 2022-05-24 20:55:07.333000
+Lobby has no trustworthy times: 5 - Start: 2022-05-24 20:56:36.333000 - End: 2022-05-24 21:01:48.333000
+Lobby has no trustworthy times: 7 - Start: 2022-05-24 21:10:42.333000 - End: 2022-05-24 21:17:11
+Lobby has no trustworthy times: 10 - Start: 2022-05-24 21:39:50 - End: 2022-05-24 21:42:56.333000
+Lobby has no trustworthy times: 13 - Start: 2022-05-24 21:54:55.666000 - End: 2022-05-24 21:56:13.333000
+Lobby has no trustworthy times: 14 - Start: 2022-05-24 21:59:50.333000 - End: 2022-05-24 22:02:03.666000
+Lobby has no trustworthy times: 15 - Start: 2022-05-24 22:03:18.683000 - End: 2022-05-24 22:09:50.416000
+Lobby has no trustworthy times: 18 - Start: 2022-05-24 22:33:43.550000 - End: 2022-05-24 22:38:46.216000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-05-24_S2_br00d_1492682575']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-05-24_S2_br00d_1492682575 -- Nr of critical lobbies not existing:2 -- [[5, Timedelta('0 days 00:54:18.666000'), Timedelta('0 days 01:07:42.883000')], [7, None, Timedelta('0 days 01:14:44.550000')], [10, None, Timedelta('0 days 01:40:38.550000')], [13, None, Timedelta('0 days 01:54:10.550000')], [14, None, Timedelta('0 days 01:59:39.550000')], [15, Timedelta('0 days 02:01:01.550000'), Timedelta('0 days 02:07:42.216000')], [18, Timedelta('0 days 02:31:18.550000'), Timedelta('0 days 02:36:21.216000')]]
+Streamer: 2022-05-24_S2_br00d_1492682575 -- [[2, Timedelta('0 days 00:21:58'), Timedelta('0 days 00:36:06.666000')], [3, Timedelta('0 days 00:38:31.666000'), Timedelta('0 days 00:45:07.333000')], [5, Timedelta('0 days 00:54:18.666000'), Timedelta('0 days 01:07:42.883000')], [7, None, Timedelta('0 days 01:14:44.550000')], [8, Timedelta('0 days 01:15:21.216000'), Timedelta('0 days 01:27:54.550000')], [9, None, Timedelta('0 days 01:32:14.883000')], [10, None, Timedelta('0 days 01:40:38.550000')], [11, Timedelta('0 days 01:41:21.550000'), Timedelta('0 days 01:45:24.883000')], [12, None, Timedelta('0 days 01:52:11.883000')], [13, None, Timedelta('0 days 01:54:10.550000')], [14, None, Timedelta('0 days 01:59:39.550000')], [15, Timedelta('0 days 02:01:01.550000'), Timedelta('0 days 02:07:42.216000')], [16, Timedelta('0 days 02:17:33.216000'), Timedelta('0 days 02:21:20.216000')], [17, Timedelta('0 days 02:21:54.216000'), Timedelta('0 days 02:29:58.216000')], [18, Timedelta('0 days 02:31:18.550000'), Timedelta('0 days 02:36:21.216000')], [19, Timedelta('0 days 02:37:02.550000'), Timedelta('0 days 02:41:25.550000')], [20, Timedelta('0 days 02:42:39.550000'), Timedelta('0 days 02:53:11.216000')], [21, Timedelta('0 days 02:54:07.550000'), Timedelta('0 days 03:05:12.966000')]]

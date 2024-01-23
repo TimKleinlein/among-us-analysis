@@ -1,0 +1,66 @@
+SESSION: 2022-02-21_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-21_S1_aribunnie_1305616488: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-21_S1_aribunnie_1305616488: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-21_S1_aribunnie_1305616488: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-21_S1_aribunnie_1305616488: Lobbies numbers not consecutive: 15 and 17
+Streamer: 2022-02-21_S1_ressnie_1305678986: Lobbies numbers not consecutive: 8 and 8
+Streamer: 2022-02-21_S1_ressnie_1305678986: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-21_S1_ressnie_1305678986: Lobbies numbers not consecutive: 12 and 12
+Streamer: 2022-02-21_S1_ressnie_1305678986: Lobbies numbers not consecutive: 17 and 19
+Streamer: 2022-02-21_S1_skadj_1305679101: Lobbies numbers not consecutive: 10 and None
+Streamer: 2022-02-21_S1_skadj_1305679101: Lobbies numbers not consecutive: None and 12
+Streamer: 2022-02-21_S1_vikramafc_1305602617: Lobbies numbers not consecutive: 9 and 11
+Streamer: 2022-02-21_S1_vikramafc_1305602617: Lobbies numbers not consecutive: 12 and 14
+Streamer: 2022-02-21_S1_zeroyalviking_1305681060: Lobbies numbers not consecutive: 7 and 7
+Streamer: 2022-02-21_S1_zeroyalviking_1305681060: Lobbies numbers not consecutive: 10 and 12
+Streamer: 2022-02-21_S1_zeroyalviking_1305681060: Lobbies numbers not consecutive: 14 and 16
+Streamer: 2022-02-21_S1_karacorvus_1305670476: Lobbies numbers not consecutive: 8 and 8
+Streamer: 2022-02-21_S1_karacorvus_1305670476: Lobbies numbers not consecutive: 8 and 8
+Streamer: 2022-02-21_S1_karacorvus_1305670476: Lobbies numbers not consecutive: 18 and 20
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: 2 and None
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: None and 3
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: 5 and None
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: None and None
+Streamer: 2022-02-21_S1_pastaroniravioli_1305569006: Lobbies numbers not consecutive: None and 7
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 1 - Start: 2022-02-21 18:21:57.333000 - End: 2022-02-21 18:29:59
+Lobby has no trustworthy times: 2 - Start: 2022-02-21 18:31:34 - End: 2022-02-21 18:44:49.333000
+Lobby has no trustworthy times: 3 - Start: 2022-02-21 19:06:09.333000 - End: 2022-02-21 19:11:27
+Lobby has no trustworthy times: 4 - Start: 2022-02-21 19:27:00.333000 - End: 2022-02-21 19:38:22.666000
+Lobby has no trustworthy times: 5 - Start: 2022-02-21 19:48:36.333000 - End: 2022-02-21 19:51:37.666000
+Lobby has no trustworthy times: 6 - Start: 2022-02-21 20:23:40 - End: 2022-02-21 20:27:13
+Lobby has no trustworthy times: 7 - Start: 2022-02-21 20:12:57.333000 - End: 2022-02-21 20:39:32
+Lobby has no trustworthy times: 8 - Start: 2022-02-21 20:40:57 - End: 2022-02-21 20:56:00.666000
+Lobby has no trustworthy times: 11 - Start: 2022-02-21 21:09:32 - End: 2022-02-21 21:20:47.666000
+Lobby has no trustworthy times: 19 - Start: 2022-02-21 22:44:05 - End: 2022-02-21 22:47:42.800000
+Lobby has no trustworthy times: 21 - Start: 2022-02-21 22:59:28 - End: 2022-02-21 23:08:31.666000
+
+
+
+
+Streamer has no trustworthy times: 2022-02-21_S1_pastaroniravioli_1305569006 - Start time: 10   2022-02-21 18:21:31
+Name: start_date, dtype: datetime64[ns]
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-21_S1_aribunnie_1305616488']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-21_S1_aribunnie_1305616488 -- Nr of critical lobbies not existing:5 -- [[6, None, Timedelta('0 days 00:18:12.666000')], [7, None, Timedelta('0 days 00:30:26')], [8, None, Timedelta('0 days 00:47:01')], [11, Timedelta('0 days 01:04:15.666000'), Timedelta('0 days 01:08:31.666000')], [19, None, Timedelta('0 days 02:38:42')], [21, None, Timedelta('0 days 02:59:25')]]
+Streamer: 2022-02-21_S1_aribunnie_1305616488 -- [[6, None, Timedelta('0 days 00:18:12.666000')], [7, None, Timedelta('0 days 00:30:26')], [8, None, Timedelta('0 days 00:47:01')], [9, None, Timedelta('0 days 00:55:18')], [10, Timedelta('0 days 00:56:16.666000'), Timedelta('0 days 00:59:24.666000')], [11, Timedelta('0 days 01:04:15.666000'), Timedelta('0 days 01:08:31.666000')], [12, Timedelta('0 days 01:12:51.666000'), None], [13, Timedelta('0 days 01:24:53'), Timedelta('0 days 01:30:27.333000')], [14, Timedelta('0 days 01:37:19'), Timedelta('0 days 01:40:41.333000')], [15, None, Timedelta('0 days 01:59:54')], [17, Timedelta('0 days 02:13:18.333000'), Timedelta('0 days 02:25:08')], [18, Timedelta('0 days 02:26:20.666000'), Timedelta('0 days 02:34:30.333000')], [19, None, Timedelta('0 days 02:38:42')], [20, Timedelta('0 days 02:40:15.333000'), Timedelta('0 days 02:49:08.333000')], [21, None, Timedelta('0 days 02:59:25')]]

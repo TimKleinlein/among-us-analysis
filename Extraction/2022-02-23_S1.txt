@@ -1,0 +1,47 @@
+SESSION: 2022-02-23_S1
+
+
+
+
+THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:
+Streamer: 2022-02-23_S1_karacorvus_1307815036: Lobbies numbers not consecutive: 3 and 5
+Streamer: 2022-02-23_S1_karacorvus_1307815036: Lobbies numbers not consecutive: 13 and 15
+Streamer: 2022-02-23_S1_courtilly_1307871403: Lobbies numbers not consecutive: 6 and 8
+Streamer: 2022-02-23_S1_ayanehylo_1307637026: Lobbies numbers not consecutive: 6 and 8
+Streamer: 2022-02-23_S1_jvckk_1307875734: Lobbies numbers not consecutive: 8 and 10
+Streamer: 2022-02-23_S1_jvckk_1307875734: Lobbies numbers not consecutive: 13 and 15
+Streamer: 2022-02-23_S1_ozzaworld_1307726183: Lobbies numbers not consecutive: 6 and None
+Streamer: 2022-02-23_S1_ozzaworld_1307726183: Lobbies numbers not consecutive: None and 8
+Streamer:  : Lobbies numbers not consecutive: 3 and 3
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: 3 and 3
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: 6 and None
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: None and 9
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: 10 and 10
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: 10 and 10
+Streamer: 2022-02-23_S1_vikramafc_1307860812: Lobbies numbers not consecutive: 15 and 17
+
+
+
+
+LOBBIES WITHOUT TRUSTWORTHY TIMES:
+Lobby has no trustworthy times: 3 - Start: 2022-02-23 21:20:38.650000 - End: 2022-02-23 21:38:48.316000
+Lobby has no trustworthy times: 4 - Start: 2022-02-23 21:40:17.666000 - End: 2022-02-23 21:43:33.816000
+Lobby has no trustworthy times: 6 - Start: 2022-02-23 21:52:28.666000 - End: 2022-02-23 21:59:12.666000
+Lobby has no trustworthy times: 9 - Start: 2022-02-23 22:27:12.550000 - End: 2022-02-23 22:31:34.550000
+
+
+
+
+
+
+
+
+STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamers who participated in all lobbies: ['2022-02-23_S1_vikramafc_1307860812']
+
+
+
+
+LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:
+Streamer: 2022-02-23_S1_vikramafc_1307860812 -- Nr of critical lobbies not existing:0 -- [[3, Timedelta('0 days 00:14:28.333000'), None], [4, None, Timedelta('0 days 00:32:53.333000')], [6, Timedelta('0 days 00:41:46.333000'), None], [9, Timedelta('0 days 01:16:24.550000'), Timedelta('0 days 01:20:46.550000')]]
+Streamer: 2022-02-23_S1_vikramafc_1307860812 -- [[2, Timedelta('0 days 00:03:59'), Timedelta('0 days 00:09:04')], [3, Timedelta('0 days 00:14:28.333000'), None], [4, None, Timedelta('0 days 00:32:53.333000')], [5, Timedelta('0 days 00:34:10'), Timedelta('0 days 00:40:52')], [6, Timedelta('0 days 00:41:46.333000'), None], [9, Timedelta('0 days 01:16:24.550000'), Timedelta('0 days 01:20:46.550000')], [10, Timedelta('0 days 01:24:13.883000'), None], [11, None, Timedelta('0 days 01:39:21.550000')], [12, None, Timedelta('0 days 01:50:23.883000')], [13, None, Timedelta('0 days 02:01:53.983000')], [14, Timedelta('0 days 02:03:32.983000'), Timedelta('0 days 02:10:38.983000')], [15, Timedelta('0 days 02:11:48.983000'), Timedelta('0 days 02:26:44.650000')], [17, Timedelta('0 days 02:36:57.983000'), Timedelta('0 days 02:40:20.983000')], [18, Timedelta('0 days 02:45:06.350000'), Timedelta('0 days 02:48:10.433000')]]

@@ -12,7 +12,7 @@ sessions.remove('unsorted')
 sessions.remove('copy_files.sh')
 
 for session in sessions:
-    with open(f'../../Lobby-Synchronization/data/initial_synchronization_output/Extraction/{session}.txt', 'w') as file:
+    with open(f'../../data/initial_synchronization_output/Extraction/{session}.txt', 'w') as file:
         sys.stdout = file
 
         print(f"SESSION: {session}")
@@ -24,7 +24,7 @@ for session in sessions:
             while delete_streamer:
 
                 # CREATE DF WITH METADATA
-                con = sqlite3.connect("../../Lobby-Synchronization/data/streams_metadata/vods.db")
+                con = sqlite3.connect("../../data/streams_metadata/vods.db")
                 cur = con.cursor()
                 g = session
                 res = cur.execute("SELECT v.id, m.path, v.published_at, v.start, v.end, m.duration "
@@ -712,7 +712,7 @@ for session in sessions:
                 extract_dic[i]['start_time'] = df[df["path"] == i]["start_date"]
                 extract_dic[i]['lobbies'] = trustworthy_streamer_dic[i]
             with open(
-                    f'../../Lobby-Synchronization/data/initial_synchronization_output/streamer_dictionaries/{session}_streamer.pkl', 'wb') as f:
+                    f'../../data/initial_synchronization_output/streamer_dictionaries/{session}_streamer.pkl', 'wb') as f:
                 pickle.dump(extract_dic, f)
 
             # extract dictionary with trustworthy lobby times for lobbies
@@ -725,7 +725,7 @@ for session in sessions:
                         if times in df['lobbies_times_final'][i]:
                             extract_lobby_dic[k][df['path'][i]] = times
             with open(
-                    f'../../Lobby-Synchronization/data/initial_synchronization_output/lobbies_dictionaries/{session}_lobbies.pkl', 'wb') as f:
+                    f'../../data/initial_synchronization_output/lobbies_dictionaries/{session}_lobbies.pkl', 'wb') as f:
                 pickle.dump(extract_lobby_dic, f)
 
 

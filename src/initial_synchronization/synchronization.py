@@ -7,7 +7,7 @@ from pysrt import SubRipTime
 import sys
 import pickle
 
-sessions = os.listdir("../../../dimstore/pop520978/data")
+sessions = os.listdir("../../../../../dimstore/pop520978/data")
 sessions.remove('unsorted')
 sessions.remove('copy_files.sh')
 

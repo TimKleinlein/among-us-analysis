@@ -21,7 +21,7 @@ for session in sessions:
 
 
 # add trustworthy lobby times for streamers without trustworthy lobby times
-df = pd.read_excel('Results.xlsx', sheet_name='Streamer_Trustworthy_Lobbies')
+df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='Streamer_Trustworthy_Lobbies')
 for session in streamer_dictionaries.keys():
     dic = streamer_dictionaries[session]
     for streamer in dic.keys():
@@ -36,7 +36,7 @@ for session in streamer_dictionaries.keys():
 
 
 # add trustworthy lobby times for main streamers from lobbies without trustworthy times
-df = pd.read_excel('Results.xlsx', sheet_name='Main_Streamer_Lobbies')
+df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='Main_Streamer_Lobbies')
 for session in streamer_dictionaries.keys():
     dic = streamer_dictionaries[session]
     for streamer in dic.keys():

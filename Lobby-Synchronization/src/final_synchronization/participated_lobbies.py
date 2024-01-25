@@ -3,7 +3,7 @@ import os
 import ast
 import pickle
 
-df = pd.read_excel('Results.xlsx', sheet_name='SubstituteNones')
+df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='SubstituteNones')
 df['Old'] = df['Old'].apply(lambda lobbies: [int(x) if x.lower() != 'none' else None for x in lobbies.split(',')])
 df['New'][7] = '2'  # was an integer before
 df['New'] = df['New'].apply(lambda lobbies: [int(x) if x.lower() != 'none' else None for x in lobbies.split(',')])

@@ -28,7 +28,7 @@ for session in sessions:
     lobbies_dictionaries[f'{session[:-12]}'] = loaded_dict
 
 # add trustworthy lobby times for lobbies without trustworthy lobby times
-df = pd.read_excel('Results.xlsx', sheet_name='Lobbies_Trustworthy_Lobbies')
+df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='Lobbies_Trustworthy_Lobbies')
 df['Session'] = df['Streamer'].apply(lambda x: x[:13])
 def enter_lobby_in_dictionary(row):
     streamer_start_time = list(streamer_dictionaries[row['Session']][row['Streamer']]['start_time'])[0]

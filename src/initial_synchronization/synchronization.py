@@ -61,7 +61,7 @@ for session in sessions:
                 df['path'] = df['path'].apply(lambda x: x[39:-4])
 
                 # EXTRACT EVENT DATA FROM SRT FILES
-                srt_path = f'../../../dimstore/pop520978/data/{session}/srt'
+                srt_path = f'../../../../../dimstore/pop520978/data/{session}/srt'
                 for name in delete_streamer_list:
                     if os.path.exists(f'{srt_path}/{name}.srt'):
                         os.remove(f'{srt_path}/{name}.srt')

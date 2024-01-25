@@ -703,7 +703,7 @@ for session in sessions:
 
             # extract assigned lobby numbers from df as csv to insert manual lobby extraction results
             df_lobby_numbers = df[['path', 'lobbies_assigned_final']]
-            df_lobby_numbers.to_csv(f'../../data/initial_synchronization_output/assignedLobbiesDf/{session}.csv', index=False)
+            df_lobby_numbers.to_csv(f'../../data/initial_synchronization_output/assignedLobbiesDfs/{session}.csv', index=False)
 
             # extract dictionary with trustworthy lobby times for streamers
             extract_dic = {}

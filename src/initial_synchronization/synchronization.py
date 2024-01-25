@@ -11,14 +11,8 @@ sessions = os.listdir("../../../dimstore/pop520978/data")
 sessions.remove('unsorted')
 sessions.remove('copy_files.sh')
 
-os.makedirs('Initial_Synchronization_Output')
-os.makedirs('Initial_Synchronization_Output/Extraction')
-os.makedirs('Initial_Synchronization_Output/assignedLobbiesDfs')
-os.makedirs('Initial_Synchronization_Output/lobbies_dictionaries')
-os.makedirs('Initial_Synchronization_Output/streamer_dictionaries')
-
 for session in sessions:
-    with open(f'Initial_Synchronization_Output/Extraction/{session}.txt', 'w') as file:
+    with open(f'../../data/initial_synchronization_output/Extraction/{session}.txt', 'w') as file:
         sys.stdout = file
 
         print(f"SESSION: {session}")
@@ -709,7 +703,7 @@ for session in sessions:
 
             # extract assigned lobby numbers from df as csv to insert manual lobby extraction results
             df_lobby_numbers = df[['path', 'lobbies_assigned_final']]
-            df_lobby_numbers.to_csv(f'Initial_Synchronization_Output/assignedLobbiesDf/{session}.csv', index=False)
+            df_lobby_numbers.to_csv(f'../../data/initial_synchronization_output/assignedLobbiesDf/{session}.csv', index=False)
 
             # extract dictionary with trustworthy lobby times for streamers
             extract_dic = {}
@@ -717,7 +711,7 @@ for session in sessions:
                 extract_dic[i] = {}
                 extract_dic[i]['start_time'] = df[df["path"] == i]["start_date"]
                 extract_dic[i]['lobbies'] = trustworthy_streamer_dic[i]
-            with open(f'Initial_Synchronization_Output/streamer_dictionaries/{session}_streamer.pkl', 'wb') as f:
+            with open(f'../../data/initial_synchronization_output/streamer_dictionaries/{session}_streamer.pkl', 'wb') as f:
                 pickle.dump(extract_dic, f)
 
             # extract dictionary with trustworthy lobby times for lobbies
@@ -729,7 +723,7 @@ for session in sessions:
                     for i in range(len(df)):
                         if times in df['lobbies_times_final'][i]:
                             extract_lobby_dic[k][df['path'][i]] = times
-            with open(f'Initial_Synchronization_Output/lobbies_dictionaries/{session}_lobbies.pkl', 'wb') as f:
+            with open(f'../../data/initial_synchronization_output/lobbies_dictionaries/{session}_lobbies.pkl', 'wb') as f:
                 pickle.dump(extract_lobby_dic, f)
 
 

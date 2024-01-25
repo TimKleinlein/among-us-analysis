@@ -8,7 +8,7 @@ from sympy import Matrix, solve_linear_system
 from scipy.linalg import lstsq
 
 
-sessions = os.listdir('streamer_dictionaries')
+sessions = os.listdir('../../data/initial_synchronization_output/streamer_dictionaries')
 sessions_to_remove = ['2022-01-19_S1_streamer.pkl', '2022-01-20_S1_streamer.pkl', '2022-01-23_S1_streamer.pkl', '2022-01-23_S2_streamer.pkl', '2022-01-24_S1_streamer.pkl', '2022-02-03_S1_streamer.pkl', '2022-03-08_S1_streamer.pkl']
 for s in sessions_to_remove:
     sessions.remove(s)
@@ -168,9 +168,9 @@ for session in distance_dic.keys():
 
 
 # export solutions streamer offset dic
-with open(f'streamer_offsets.pkl', 'wb') as f:
+with open(f'../../streamer_offsets.pkl', 'wb') as f:
     pickle.dump(solutions_dic, f)
 
 # export streamer dictionary containing the start time of each streamer
-with open(f'streamer_start_times.pkl', 'wb') as f:
+with open(f'../../streamer_start_times.pkl', 'wb') as f:
     pickle.dump(streamer_dictionaries, f)

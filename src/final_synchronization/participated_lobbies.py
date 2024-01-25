@@ -9,7 +9,7 @@ df['New'][7] = '2'  # was an integer before
 df['New'] = df['New'].apply(lambda lobbies: [int(x) if x.lower() != 'none' else None for x in lobbies.split(',')])
 
 
-sessions = os.listdir('assignedLobbiesDfs')
+sessions = os.listdir('../../data/initial_synchronization_output/assignedLobbiesDfs')
 
 dataframes = {}
 for session in sessions:
@@ -133,5 +133,5 @@ for s in sessions_to_remove:
     del(dataframes[s])
 
 # export final lobby assignments
-with open(f'final_lobby_assignments.pkl', 'wb') as f:
+with open(f'../../final_lobby_assignments.pkl', 'wb') as f:
     pickle.dump(dataframes, f)

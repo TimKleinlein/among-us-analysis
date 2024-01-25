@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import timedelta
 
 # first create streamer dictionary because later start time of main streamers is needed
-sessions = os.listdir('streamer_dictionaries')
+sessions = os.listdir('../../data/initial_synchronization_output/streamer_dictionaries')
 sessions_to_remove = ['2022-01-19_S1_streamer.pkl', '2022-01-20_S1_streamer.pkl', '2022-01-23_S1_streamer.pkl', '2022-01-23_S2_streamer.pkl', '2022-01-24_S1_streamer.pkl', '2022-02-03_S1_streamer.pkl', '2022-03-08_S1_streamer.pkl']
 for s in sessions_to_remove:
     sessions.remove(s)
@@ -16,7 +16,7 @@ for session in sessions:
     streamer_dictionaries[f'{session[:-13]}'] = loaded_dict
 
 # now import lobbies dictionaries
-sessions = os.listdir('lobbies_dictionaries')
+sessions = os.listdir('../../data/initial_synchronization_output/lobbies_dictionaries')
 sessions_to_remove = ['2022-01-19_S1_lobbies.pkl', '2022-01-20_S1_lobbies.pkl', '2022-01-23_S1_lobbies.pkl', '2022-01-23_S2_lobbies.pkl', '2022-01-24_S1_lobbies.pkl', '2022-02-03_S1_lobbies.pkl', '2022-03-08_S1_lobbies.pkl']
 for s in sessions_to_remove:
     sessions.remove(s)
@@ -81,5 +81,5 @@ for session in lobbies_dictionaries.keys():
             print(f'{session} - {lobby}')
 
 # export lobbies dic
-with open(f'trustworthy_lobbies.pkl', 'wb') as f:
+with open(f'../../trustworthy_lobbies.pkl', 'wb') as f:
     pickle.dump(lobbies_dictionaries, f)

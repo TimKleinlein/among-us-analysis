@@ -11,7 +11,7 @@ for s in sessions_to_remove:
 
 streamer_dictionaries = {}
 for session in sessions:
-    with open(f'streamer_dictionaries/{session}', 'rb') as f:
+    with open(f'../../data/initial_synchronization_output/streamer_dictionaries/{session}', 'rb') as f:
         loaded_dict = pickle.load(f)
     streamer_dictionaries[f'{session[:-13]}'] = loaded_dict
 
@@ -23,7 +23,7 @@ for s in sessions_to_remove:
 
 lobbies_dictionaries = {}
 for session in sessions:
-    with open(f'lobbies_dictionaries/{session}', 'rb') as f:
+    with open(f'../../data/initial_synchronization_output/lobbies_dictionaries/{session}', 'rb') as f:
         loaded_dict = pickle.load(f)
     lobbies_dictionaries[f'{session[:-12]}'] = loaded_dict
 
@@ -81,5 +81,5 @@ for session in lobbies_dictionaries.keys():
             print(f'{session} - {lobby}')
 
 # export lobbies dic
-with open(f'../../trustworthy_lobbies.pkl', 'wb') as f:
+with open(f'../../data/final_synchronization_output/trustworthy_lobbies.pkl', 'wb') as f:
     pickle.dump(lobbies_dictionaries, f)

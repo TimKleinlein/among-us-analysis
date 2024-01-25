@@ -11,7 +11,7 @@ with open(f'../../data/final_synchronization_output/trustworthy_lobbies.pkl', 'r
     trustworthy_lobbies = pickle.load(f)
 
 # import final lobby assignments
-with open(f'../../final_lobby_assignments.pkl', 'rb') as f:
+with open(f'../../data/final_synchronization_output/final_lobby_assignments.pkl', 'rb') as f:
     participated_lobbies = pickle.load(f)
 
 # for each session build ranking dictionary storing which streamer has the most trustworthy times -> if for a lobby more trustworthy times exist his time is preferred
@@ -65,3 +65,7 @@ for session in final_lobby_times.keys():
         for streamer in final_lobby_times[session][lobby].keys():
             final_lobby_times[session][lobby][streamer][0] = final_lobby_times[session][lobby][streamer][0] - list(streamer_start_times[session][streamer]['start_time'])[0]
             final_lobby_times[session][lobby][streamer][1] = final_lobby_times[session][lobby][streamer][1] - list(streamer_start_times[session][streamer]['start_time'])[0]
+
+# export final lobby times
+with open(f'../../data/final_synchronization_output/final_lobby_times.pkl', 'wb') as f:
+    pickle.dump(final_lobby_times, f)

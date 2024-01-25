@@ -15,7 +15,7 @@ for s in sessions_to_remove:
 
 streamer_dictionaries = {}
 for session in sessions:
-    with open(f'streamer_dictionaries/{session}', 'rb') as f:
+    with open(f'../../data/initial_synchronization_output/streamer_dictionaries/{session}', 'rb') as f:
         loaded_dict = pickle.load(f)
     streamer_dictionaries[f'{session[:-13]}'] = loaded_dict
 
@@ -168,9 +168,9 @@ for session in distance_dic.keys():
 
 
 # export solutions streamer offset dic
-with open(f'../../streamer_offsets.pkl', 'wb') as f:
+with open(f'../../data/final_synchronization_output/streamer_offsets.pkl', 'wb') as f:
     pickle.dump(solutions_dic, f)
 
 # export streamer dictionary containing the start time of each streamer
-with open(f'../../streamer_start_times.pkl', 'wb') as f:
+with open(f'../../data/final_synchronization_output/streamer_start_times.pkl', 'wb') as f:
     pickle.dump(streamer_dictionaries, f)

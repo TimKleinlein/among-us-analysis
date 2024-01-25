@@ -13,7 +13,7 @@ sessions = os.listdir('../../data/initial_synchronization_output/assignedLobbies
 
 dataframes = {}
 for session in sessions:
-    dataframes[f'data_{session}'] = pd.read_csv(f'assignedLobbiesDfs/{session}')
+    dataframes[f'data_{session}'] = pd.read_csv(f'../../data/initial_synchronization_output/assignedLobbiesDfs/{session}')
 for k, v in dataframes.items():
     dataframes[k]['lobbies_assigned_final'] = v['lobbies_assigned_final'].apply(lambda x: ast.literal_eval(x))
 
@@ -133,5 +133,5 @@ for s in sessions_to_remove:
     del(dataframes[s])
 
 # export final lobby assignments
-with open(f'../../final_lobby_assignments.pkl', 'wb') as f:
+with open(f'../../data/final_synchronization_output/final_lobby_assignments.pkl', 'wb') as f:
     pickle.dump(dataframes, f)

@@ -8,11 +8,13 @@ from sympy import Matrix, solve_linear_system
 from scipy.linalg import lstsq
 
 
+# get all sessions and remove those where lobby extraction did not work
 sessions = os.listdir('../../data/initial_synchronization_output/streamer_dictionaries')
 sessions_to_remove = ['2022-01-19_S1_streamer.pkl', '2022-01-20_S1_streamer.pkl', '2022-01-23_S1_streamer.pkl', '2022-01-23_S2_streamer.pkl', '2022-01-24_S1_streamer.pkl', '2022-02-03_S1_streamer.pkl', '2022-03-08_S1_streamer.pkl']
 for s in sessions_to_remove:
     sessions.remove(s)
 
+# load dictionary with trtustworthy lobby times for each streamer
 streamer_dictionaries = {}
 for session in sessions:
     with open(f'../../data/initial_synchronization_output/streamer_dictionaries/{session}', 'rb') as f:
@@ -20,7 +22,7 @@ for session in sessions:
     streamer_dictionaries[f'{session[:-13]}'] = loaded_dict
 
 
-# add trustworthy lobby times for streamers without trustworthy lobby times
+# add trustworthy lobby times for streamers without trustworthy lobby times: use the results from manual extraction
 df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='Streamer_Trustworthy_Lobbies')
 for session in streamer_dictionaries.keys():
     dic = streamer_dictionaries[session]
@@ -53,8 +55,8 @@ for session in streamer_dictionaries.keys():
 # delete manually one streamer where assignments did not work
 del streamer_dictionaries['2022-02-21_S1']['2022-02-21_S1_pastaroniravioli_1305569006']
 
-
-# pairwise dictionaries between streamers
+# build a distance dic for all streamer pairs: whenever two streamers have trustworthy lobby times assigned to the same lobby with a duration difference
+# less than 5 seconds -> store the time difference of the lobby ends for the streamer pair (later a mean of all the lobby times pairs will be calculated)
 distance_dic = {}
 for session in streamer_dictionaries.keys():
     dic = streamer_dictionaries[session]
@@ -78,23 +80,14 @@ for session in streamer_dictionaries.keys():
             else:
                 distance_dic[session][streamer][partner] = []
 
-"""
-for se in distance_dic.keys():
-    for st in distance_dic[se].keys():
-        for pa in distance_dic[se][st].keys():
-            for e in distance_dic[se][st][pa]:
-                if e > 10:
-                    print(f'{e} Session: {se}; Streamer: {st}; Partner: {pa}')
-"""
-
+# calculate for all streamer pais their average distance in the lobby times: now i know f.e. streamer A is on average 2 seconds earlier than streamer B
 for se in distance_dic.keys():
     for st in distance_dic[se].keys():
         for pa in distance_dic[se][st].keys():
             if len(distance_dic[se][st][pa]) != 0:
                 distance_dic[se][st][pa] = [np.mean(distance_dic[se][st][pa])]
 
-
-"""
+# check if streamer remains without one average distance to any other streamer -> not the case
 for se in distance_dic.keys():
     for st in distance_dic[se].keys():
         rel = 0
@@ -102,8 +95,10 @@ for se in distance_dic.keys():
             rel = rel + len(distance_dic[se][st][pa])
         if rel == 0:
             print(f'Session: {se}; Streamer: {st}')
-"""
 
+# USE THE EXISTING AVERAGE DISTANCES TO CALCULATE MOST LIKELY AVERAGE DISTANCES BETWEEN ALL STREAMERS
+# treat as system of linear equations: Ax = b: A = 1/-1/0 matrix defining which streamers are part of equation, x = streamer times, b = vector of average differences
+# then find least square error solution to this system
 # create matrix
 # num_row = offsets i have -> non-empty lists / 2
 # num_col = streamers i have in the session -> keys of dic
@@ -131,7 +126,7 @@ for session in distance_dic.keys():
                     row += 1
                     displayed_relationships.append([st, pa])
 
-    # create b
+    # create b: use the respective average distance corresponding to the streamers defines in the matrix row
     b = np.zeros(num_rows)
 
     row = 0
@@ -145,6 +140,7 @@ for session in distance_dic.keys():
                     displayed_relationships.append([st, pa])
 
     """
+    # sympy solution in the end not used: this package allows to display results of least square optimizations relative: f.e. x2 = x1+2
     left = np.dot(A.transpose(), A)
     right = np.dot(A.transpose(), b)
     matrix = np.column_stack((left, right))
@@ -159,7 +155,7 @@ for session in distance_dic.keys():
 
         solutions_dic[session] = relative_solution
     """
-    # use scipy least square solution
+    # use scipy least error square solution
     x, residuals, rank, s = lstsq(A, b)
     relative_solution = {}
     for index, e in enumerate(x):
@@ -167,10 +163,10 @@ for session in distance_dic.keys():
     solutions_dic[session] = relative_solution
 
 
-# export solutions streamer offset dic
+# export solutions for streamer offset dic to be used in combine_results.py:
 with open(f'../../data/final_synchronization_output/streamer_offsets.pkl', 'wb') as f:
     pickle.dump(solutions_dic, f)
 
-# export streamer dictionary containing the start time of each streamer
+# export streamer dictionary containing the start time of each streamer to be used in combine_results.py:
 with open(f'../../data/final_synchronization_output/streamer_start_times.pkl', 'wb') as f:
     pickle.dump(streamer_dictionaries, f)

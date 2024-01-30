@@ -3,6 +3,8 @@ import os
 import ast
 import pickle
 
+# import results from manual extraction on how to handle non consecutive lobby assignments for each streamer:
+# import streamers which have a None assignment at the beginning or end together with how the None should be replaced
 df = pd.read_excel('../../data/manual_lobby_extraction/Results.xlsx', sheet_name='SubstituteNones')
 df['Old'] = df['Old'].apply(lambda lobbies: [int(x) if x.lower() != 'none' else None for x in lobbies.split(',')])
 df['New'][7] = '2'  # was an integer before
@@ -11,6 +13,7 @@ df['New'] = df['New'].apply(lambda lobbies: [int(x) if x.lower() != 'none' else 
 
 sessions = os.listdir('../../data/initial_synchronization_output/assignedLobbiesDfs')
 
+# create dictionary storing for all sessions for each streamer in which lobby he participated
 dataframes = {}
 for session in sessions:
     dataframes[f'data_{session}'] = pd.read_csv(f'../../data/initial_synchronization_output/assignedLobbiesDfs/{session}')
@@ -18,7 +21,7 @@ for k, v in dataframes.items():
     dataframes[k]['lobbies_assigned_final'] = v['lobbies_assigned_final'].apply(lambda x: ast.literal_eval(x))
 
 
-# substitute Nones with at beginning & end with correct lobbies
+# for streamers with Nones at beginning & end substitute those with correct lobbies
 def substitute_nones(row):
     if row['path'] in list(df['Streamer']):
         old_values = list(df[df['Streamer'] == row['path']]['Old'])[0]
@@ -46,7 +49,7 @@ for k in dataframes.keys():
     dataframes[k] = data
 
 
-# remove doubled lobby assignments (f.e. 13,14,14,15)
+# remove doubled lobby assignments (f.e. 13,14,14,15 --> 13,14,15)
 def remove_doubles(row):
     unique_list = []
     seen = set()
@@ -63,7 +66,8 @@ for k in dataframes.keys():
     dataframes[k] = data
 
 
-# add missing lobbies in between minimum and maximum lobby
+# add missing lobbies in between minimum and maximum lobby: manual extraction found all streamers which skipped a lobby
+# (these skipped lobbies will later be removed). For all others the participated lobbies are consecutive
 def add_missing_lobbies(row):
     new_list = [row['lobbies_assigned_final'][0]]
     for i in range(1, len(row['lobbies_assigned_final'])):
@@ -82,7 +86,7 @@ for k in dataframes.keys():
     dataframes[k] = data
 
 
-# correct manually the assignments for the two streamers which skipped a lobby
+# correct the assignments for the two streamers which skipped a lobby (found by manual extraction)
 def skip_lobby(row, num):
     print(row)
     old_list = row['lobbies_assigned_final']
@@ -132,6 +136,6 @@ sessions_to_remove = ['data_2022-01-19_S1.csv', 'data_2022-01-20_S1.csv', 'data_
 for s in sessions_to_remove:
     del(dataframes[s])
 
-# export final lobby assignments
+# export final participated lobbies for each streamer to be used in combine_results.py
 with open(f'../../data/final_synchronization_output/final_lobby_assignments.pkl', 'wb') as f:
     pickle.dump(dataframes, f)

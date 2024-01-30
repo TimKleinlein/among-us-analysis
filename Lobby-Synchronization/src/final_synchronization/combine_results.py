@@ -14,7 +14,8 @@ with open(f'../../data/final_synchronization_output/trustworthy_lobbies.pkl', 'r
 with open(f'../../data/final_synchronization_output/final_lobby_assignments.pkl', 'rb') as f:
     participated_lobbies = pickle.load(f)
 
-# for each session build ranking dictionary storing which streamer has the most trustworthy times -> if for a lobby more trustworthy times exist his time is preferred
+# for each session build ranking dictionary storing which streamer has the most trustworthy times
+# -> if for a lobby more trustworthy times exist his time is taken as trustworthy lobby time for this lobby
 ranking_dic = {}
 for session in trustworthy_lobbies.keys():
     dic = trustworthy_lobbies[session]
@@ -26,7 +27,7 @@ for session in trustworthy_lobbies.keys():
             else:
                 ranking_dic[session][streamer] = 1
 
-# go through all sessions and all lobbies and choose winning lobby time
+# go through all sessions and all lobbies and choose lobby time from the preffered streamer
 for session in trustworthy_lobbies.keys():
     dic = trustworthy_lobbies[session]
     for lobby in dic.keys():
@@ -41,6 +42,8 @@ for session in trustworthy_lobbies.keys():
                 del dic[lobby][s]
 
 
+# get final lobby times for all streamers and store in dictionary: go over all lobbies and for all streamers who participated
+# in the lobby get their lobby time by adding their offset to the trustworthy streamer to this streamers lobby time
 final_lobby_times = {}
 for session in trustworthy_lobbies.keys():
     dic = trustworthy_lobbies[session]
@@ -66,6 +69,6 @@ for session in final_lobby_times.keys():
             final_lobby_times[session][lobby][streamer][0] = final_lobby_times[session][lobby][streamer][0] - list(streamer_start_times[session][streamer]['start_time'])[0]
             final_lobby_times[session][lobby][streamer][1] = final_lobby_times[session][lobby][streamer][1] - list(streamer_start_times[session][streamer]['start_time'])[0]
 
-# export final lobby times
+# export final lobby times as pkl file
 with open(f'../../data/final_synchronization_output/final_lobby_times.pkl', 'wb') as f:
     pickle.dump(final_lobby_times, f)

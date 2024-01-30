@@ -7,11 +7,14 @@ from pysrt import SubRipTime
 import sys
 import pickle
 
+# extract the different sessions of the streaming data
 sessions = os.listdir("../../../../../../dimstore/pop520978/data")
 sessions.remove('unsorted')
 sessions.remove('copy_files.sh')
 
+# go over all sessions individually and create first lobby assignments for the streamers using the metadata and srt files of the VOD streams
 for session in sessions:
+    # create an output file for each session to store the results of the programmatic lobby assignments to later improve these results by a manual lobby inspection
     with open(f'../../data/initial_synchronization_output/Extraction/{session}.txt', 'w') as file:
         sys.stdout = file
 
@@ -19,11 +22,12 @@ for session in sessions:
         print("\n\n\n")
 
         try:
+            # create a delete streamer list to possibly delete streamers from the lobby synchronization process if image extraction did not work at all for their VOD stream
             delete_streamer = True
             delete_streamer_list = []
             while delete_streamer:
 
-                # CREATE DF WITH METADATA
+                # create a dataframe storing the relevant metadata of the VOD for each streamer of the session
                 con = sqlite3.connect("../../data/streams_metadata/vods.db")
                 cur = con.cursor()
                 g = session
@@ -34,13 +38,10 @@ for session in sessions:
                 for name in delete_streamer_list:
                     data = [tup for tup in data if tup[1][39:] != f"{name}.mkv"]
 
-
-                # Create a DataFrame
                 columns = ['id', 'path', 'published_at', 'start_delta', 'end_delta', 'duration']
                 df = pd.DataFrame(data, columns=columns)
 
-
-                # Preprocess DataFrame
+                # Preprocess DataFrame: calculate the correct start and end date for each streamer based on their publish time, start delta and duration
                 def start_calculator(row):
                     if pd.notnull(row['start_delta']):
                         return datetime.strptime(row['published_at'], '%Y-%m-%d %H:%M:%S.%f') + timedelta(seconds=row['start_delta'])
@@ -60,8 +61,11 @@ for session in sessions:
                 df['end_date'] = df.apply(end_calculator, axis=1)
                 df['path'] = df['path'].apply(lambda x: x[39:-4])
 
-                # EXTRACT EVENT DATA FROM SRT FILES
+                # EXTRACT EVENT DATA FROM SRT FILES: for each streamer i have srt file storing each extracted event from image recognition:
+                # extracted events are either lobby start or lobby ends, have a start timestamp, an end timestamp and a duration
+
                 srt_path = f'../../../../../../dimstore/pop520978/data/{session}/srt'
+                # remove streamers for which lobby assignment did not work at all
                 for name in delete_streamer_list:
                     if os.path.exists(f'{srt_path}/{name}.srt'):
                         os.remove(f'{srt_path}/{name}.srt')
@@ -83,14 +87,19 @@ for session in sessions:
                 df = df.drop('drop', axis=1)
                 df = df.reset_index(drop=True)
 
+                # store first lobby proposals for each streamer in dictionary streamer_lobbies
+                # one lobby proposal exists of a lobby start and a lobby end. Create these lobby proposals such that whenever the order
+                # of lobby start -> lobby end -> lobby start -> lobby end ... is broken the missing end or start is substituted by a None value
                 streamer_lobbies = {}
                 for streamer in streamers:
                     subs = pysrt.open(f"{srt_path}/{streamer}")
                     timestamps = []
 
                     for sub in subs:
+                        # skip srt events with a duration not realistic for a lobby start / end event (the duration for a correctly recognized event is usually 6 seconds)
                         if sub.duration > SubRipTime(seconds=30) or sub.duration < SubRipTime(seconds=2):
                             continue
+                        # convert srt events in time deltas as later timestamps are used to connect different streams
                         event_time = timedelta(hours=sub.start.hours, minutes=sub.start.minutes, seconds=sub.start.seconds,
                                                milliseconds=sub.start.milliseconds)
                         if len(timestamps) == 0:
@@ -119,7 +128,6 @@ for session in sessions:
 
                 df['lobbies'] = df['path'].apply(lambda x: streamer_lobbies[f'{x}.srt'])
 
-
                 # CHANGE FORMAT OF LOBBY TIMES IN DF TO TIMESTAMPS
                 # Function to calculate the lobby timestamps
                 def sum_timedeltas(row):
@@ -127,20 +135,21 @@ for session in sessions:
                              for td in sublist] for sublist in row['lobbies']]
 
 
-                # Apply the function to create a new column 'lobbies_times'
+                # Apply the function to create a new column 'lobbies_times' which stores proposed lobbies as timestamps
                 df['lobbies_times'] = df.apply(sum_timedeltas, axis=1)
 
                 # kick all lobbies times with a duration < 1 minute (assumption that lobbies usually go longer and no problem if data of short lobby is lost)
                 df['lobbies_times'] = df['lobbies_times'].apply(
                     lambda lst: [x for x in lst if x[1] is None or x[0] is None or (x[1] - x[0]) > timedelta(seconds=60)])
 
-                # CREATE A DICTIONARY OF LOBBIES TO ASSIGN DIFFERENT LOBBY TIMES TO LOBBIES
-                # create list of all the lobbies times
+                # CREATE A DICTIONARY OF LOBBIES TO FIND LOBBIES OF THE SESSION USING DIFFERENT PROPOSED LOBBY TIMES OF STREAMERS
+                # create list of all the lobbies times and sort them according to its time
                 df_exploded = df.explode('lobbies_times')
                 all_lobbies_list = df_exploded['lobbies_times'].tolist()
                 sorted_all_lobbies_list = sorted(all_lobbies_list, key=lambda x: (x[0] is None, x[0]))
 
-                # assign lobby times to a lobby dictionary
+                # assign lobby times to a lobby dictionary: go over all time-sorted lobby times and either assign them to an existing session lobby
+                # or create a new session lobby according to the lobby times data
                 lobby_dic = {}
                 num_counter = 1
                 for lob in sorted_all_lobbies_list:
@@ -148,6 +157,8 @@ for session in sessions:
                         continue
                     assigned_to_lobby = False
                     for i in lobby_dic.keys():
+                        # if there already is a session lobby which has a start date less than two minutes different from lobby time assign this lobby
+                        # time to the existing session lobby
                         if lob[0] - lobby_dic[i]['lobby_start'] < timedelta(
                                 minutes=2):  # and lob[1] - lobby_dic[i]['lobby_end'] < timedelta(minutes=2):
                             lobby_dic[i]['timestamp_list'].append(lob)
@@ -157,12 +168,12 @@ for session in sessions:
                             break
                     if assigned_to_lobby:
                         continue
+                    # if no session lobby has a start date less than 2 minutes away from lobby time, this lobby time creates a new session lobby
                     else:
                         lobby_dic[num_counter] = {'lobby_start': lob[0],
                                                   'lobby_end': lob[1],
                                                   'timestamp_list': [lob]}
                         num_counter += 1
-
 
                 # ASSIGN LOBBY TIMES CONTAINING A NONE VALUE
                 # to assign lobby times with None as start value extract median lobby start / end for built lobbies
@@ -172,7 +183,8 @@ for session in sessions:
                     lobby_ends = sorted([x[1] for x in lobby_dic[i]['timestamp_list']])
                     lobby_dic[i]['lobby_end'] = lobby_ends[int(len(lobby_ends) / 2) - 1]
 
-                # now assign lobby times with None to lobbies
+                # now assign lobby times with None to lobbies: use the not None part of the lobby time and find session lobby which
+                # has a median start / end not further away than two minutes
                 for lob in sorted_all_lobbies_list:
                     if lob[0] is None or lob[1] is None:
                         if lob[0] is None:
@@ -191,7 +203,6 @@ for session in sessions:
 
                     else:
                         continue
-
 
                 # DELETE "WRONG" LOBBIES
                 # delete all lobbies which have only one timestamp which is also shorter than one minute
@@ -215,7 +226,6 @@ for session in sessions:
                     c += 1
                 lobby_dic = new_dic
 
-
                 # CREATE COLUMN IN DF MAPPING LOBBY TIMES TO LOBBIES
                 # create new column in df in which lobby times are mapped to lobbies
                 def find_lobby(sublist):
@@ -224,11 +234,10 @@ for session in sessions:
                             return k
                     return None
 
-
                 df['lobbies_assigned_with_None'] = df['lobbies_times'].apply(lambda sublists: [find_lobby(sublist) for sublist in sublists])
 
-
                 # check for streamers where event extraction did not work: more than 50% of extracted lobby times are assigned to lobbies with no other lobby times
+                # if that is the case, add streamer to delete list
                 def single_lobbies_counter(row):
                     counter = 0
                     for lobby in row['lobbies_assigned_with_None']:
@@ -246,8 +255,7 @@ for session in sessions:
                 if len(list(df.loc[df['single_lobby_score'] > 0.5, 'path'].values)) > 0:
                     delete_streamer = True
 
-
-            # merge lobbies according to end timestamps
+            # merge lobbies according to end timestamps: if median lobby end of tow lobbies is less than 45 seconds apart, merge these two lobbies
             for h in sorted(list(lobby_dic.keys()), reverse=True):
                 for j in sorted(list(lobby_dic.keys()), reverse=True):
                     if j == h:
@@ -279,7 +287,6 @@ for session in sessions:
             for source in sorted(list(mapper.keys())):
                 df['lobbies_assigned_with_None'] = df['lobbies_assigned_with_None'].apply(
                     lambda lst: [mapper[source] if x == source else x for x in lst])
-
 
             # when lobbies are wrongly ordered time-wise (lobby_n has later end than lobby_n+1) find lobby time causing this and split this lobby time up into two lobbies
             # first case: second lobby is causing the problem because it has only one lobby time ending too early -> move this lobby time to prior lobby and delete later lobby
@@ -465,6 +472,8 @@ for session in sessions:
                     timestamps[-1].append(None)
                 streamer_duration_lobbies[streamer] = timestamps
             """
+
+            # EVALUATION OF LOBBY ASSIGNMENTS
             # go over all lobbies and for each lobby find those lobby times which have an end time that is more than 15 sec away from at least two other end times in this lobby
             def checker(row, num):
                 try:
@@ -477,43 +486,7 @@ for session in sessions:
                     return None
 
             """
-            number_extracted_lobbies = max(df['lobbies_assigned_final'].apply(lambda x: max(x)))
-            for lobby_num in range(1, number_extracted_lobbies):
-            
-                r = df.apply(lambda row: checker(row, lobby_num), axis=1)
-            
-                # delete all streamers which did not join the lobby and thus have None in this row
-                del_list = []
-                for i in range(len(r)):
-                    if r[i] is None:
-                        del_list.append(i)
-                del_list = sorted(del_list, reverse=True)
-                for ind in del_list:
-                    r.drop(ind, inplace=True)
-                streamer_lookup = list(r.index)
-                r.index = list(range(len(r)))
-            
-                for i in range(len(r)):
-                    c = 0
-                    for j in range(len(r)):  # check end time of event
-                        if r[i][1] is not None and r[j][1] is not None:
-                            if abs(r[i][1] - r[j][1]) > timedelta(seconds=15):
-                                c += 1
-                    if c >= 2:  # if at least two other lobby ends in this lobby are more than 15 sec away check duration of end srt event
-                        idx_in_streamer_duration_dic = list(df[df["path"] == df["path"][streamer_lookup[i]]]["lobbies_times"])[0].index(r[i])
-                        if streamer_duration_lobbies[f'{df["path"][streamer_lookup[i]]}.srt'][idx_in_streamer_duration_dic][1] > SubRipTime(seconds=30):  # if end event duration is larger than 30 sec set its timestamp to None
-                            idx = list(df[df["path"] == df["path"][streamer_lookup[i]]]["lobbies_times_final"])[0].index(r[i])  # find position in lobby times final list
-                            def gg(row, sn, li):
-                                if row['path'] == sn:
-                                    row['lobbies_times_final'][li] = None
-                            df.apply(lambda row: gg(row, df["path"][streamer_lookup[i]], idx), axis=1)
-            
-            """
-
-
-            # EVALUATION OF LOBBY ASSIGNMENTS
-            # check for all final lobbies for outliers within the lobbies
-            """
+            # check for all final lobbies for outliers within the lobbies and print them
             number_extracted_lobbies = max(df['lobbies_assigned_final'].apply(lambda x: max(x, key=lambda y: float('-inf') if y is None else y)))
             for lobby_num in range(1, number_extracted_lobbies):
             
@@ -548,7 +521,7 @@ for session in sessions:
                         print(f'Lobby number: {lobby_num}, id: {i}, end - {r[i]}')
             """
 
-            # check for all streamers if final lobbies assigned are subsequent numbers
+            # check for all streamers if final lobbies assigned are subsequent numbers: if not print the exceptions in session log file
             print("THE FOLLOWING STREAMERS HAVE NON-CONSECUTIVE LOBBIES:")
             for j in range(len(df)):
                 lobbies = df['lobbies_assigned_final'][j]
@@ -558,8 +531,9 @@ for session in sessions:
                     elif lobbies[i] + 1 != lobbies[i + 1]:
                         print(f'Streamer: {df["path"][j]}: Lobbies numbers not consecutive: {lobbies[i]} and {lobbies[i+1]}')
 
-
-            #  for all lobbies find trustworthy lobby times
+            # PREPARE NEXT STEPS USING THE RESULTS FROM THE PROGRAMMATIC LOBBY ASSIGNMENTS
+            # for all lobbies find trustworthy lobby times: lobby times are trustworthy if at least one other lobby time in the same lobby
+            # has a similar start date and end date (max 10 sec difference) and duration (max 5 seconds)
             for key in lobby_dic.keys():
                 lobby_dic[key]['trustworthy_times'] = []
                 first_lobby_times = []  # only consider lobby times which originally created lobby as candidates for trustworthy lobby times
@@ -577,9 +551,8 @@ for session in sessions:
                         lobby_dic[key]['trustworthy_times'].append(lt)
 
 
-            # for streamers check which of their lobby times is trustworthy
+            # for all streamers find their trustworthy lobby times: go over all their lobby times and compare with the just created dictionary of trustworthy lobby times
             trustworthy_streamer_dic = {}
-
 
             def extract_trustworthy_lobby_times(row):
                 streamer = row['path']
@@ -590,35 +563,9 @@ for session in sessions:
                     elif lobby_time in lobby_dic[row['lobbies_assigned_final'][lobby_index]]['trustworthy_times']:
                         trustworthy_streamer_dic[streamer][row['lobbies_assigned_final'][lobby_index]] = lobby_time
 
-
             df.apply(lambda row: extract_trustworthy_lobby_times(row), axis=1)
 
-            """
-            # calculate average streamer differences
-            streamer_utc_diff = {}
-            streamers = trustworthy_streamer_dic.keys()
-            for s1 in streamers:
-                streamer_utc_diff[s1] = {}
-                s1_lobbies = list(trustworthy_streamer_dic[s1].keys())
-                for s2 in streamers:
-                    if s1 == s2:
-                        continue
-                    s2_lobbies = list(trustworthy_streamer_dic[s2].keys())
-                    both_streamer_lobbies = list(set(s1_lobbies).intersection(set(s2_lobbies)))
-                    if len(both_streamer_lobbies) == 0:
-                        streamer_utc_diff[s1][s2] = None
-                    else:
-                        n = 0
-                        abs_difference = timedelta(seconds=0)
-                        for l in both_streamer_lobbies:
-                            abs_difference += trustworthy_streamer_dic[s1][l][0] - trustworthy_streamer_dic[s2][l][0]
-                            abs_difference += trustworthy_streamer_dic[s1][l][1] - trustworthy_streamer_dic[s2][l][1]
-                            n += 2
-                        streamer_utc_diff[s1][s2] = abs_difference / n
-            """
-
-
-            # print lobbies for which i do not have trustworthy times
+            # print lobbies for which i do not have trustworthy times in log file of session
             print("\n\n\n")
             print("LOBBIES WITHOUT TRUSTWORTHY TIMES:")
             lobbies_wo_trustworthy_times = []
@@ -627,7 +574,7 @@ for session in sessions:
                     lobbies_wo_trustworthy_times.append(i)
                     print(f'Lobby has no trustworthy times: {i} - Start: {lobby_dic[i]["lobby_start"]} - End: {lobby_dic[i]["lobby_end"]}')
 
-            # print streamers for which i do not have trustworthy times
+            # print streamers for which i do not have trustworthy times in log file of session
             print("\n\n\n")
             for i in trustworthy_streamer_dic.keys():
                 if len(trustworthy_streamer_dic[i]) == 0:
@@ -640,8 +587,7 @@ for session in sessions:
             top_streamer = list(df[df['lobbies_participated'] == max(df['lobbies_participated'])]['path'])
             print(f'Streamers who participated in all lobbies: {top_streamer}')
 
-
-            # for streamers who participated in all lobbies print lobby times
+            # for streamers who participated in all lobbies print lobby times for faster manual lobby extraction
             print("\n\n\n")
             print("LOBBY TIMES OF STREAMERS WHO PARTICIPATED IN ALL LOBBIES:")
             for s in top_streamer:
@@ -701,11 +647,11 @@ for session in sessions:
                 print(f'Streamer: {s} -- Nr of critical lobbies not existing:{lobbies_not_existing} -- {srt_times_critical}')
                 print(f'Streamer: {s} -- {srt_times_all}')
 
-            # extract assigned lobby numbers from df as csv to insert manual lobby extraction results
+            # extract assigned lobby numbers from df as csv to insert manual lobby extraction results in participated_lobbies.py
             df_lobby_numbers = df[['path', 'lobbies_assigned_final']]
             df_lobby_numbers.to_csv(f'../../data/initial_synchronization_output/assignedLobbiesDfs/{session}.csv', index=False)
 
-            # extract dictionary with trustworthy lobby times for streamers
+            # extract dictionary with trustworthy lobby times for streamers to be used in streamer_dictionaries.py
             extract_dic = {}
             for i in trustworthy_streamer_dic.keys():
                 extract_dic[i] = {}
@@ -715,7 +661,7 @@ for session in sessions:
                     f'../../data/initial_synchronization_output/streamer_dictionaries/{session}_streamer.pkl', 'wb') as f:
                 pickle.dump(extract_dic, f)
 
-            # extract dictionary with trustworthy lobby times for lobbies
+            # extract dictionary with trustworthy lobby times for lobbies to be used in lobbies_dictionaries.py
             extract_lobby_dic = {}
             for k in lobby_dic.keys():
                 lobby = lobby_dic[k]
@@ -727,7 +673,6 @@ for session in sessions:
             with open(
                     f'../../data/initial_synchronization_output/lobbies_dictionaries/{session}_lobbies.pkl', 'wb') as f:
                 pickle.dump(extract_lobby_dic, f)
-
 
 
         except Exception as e:

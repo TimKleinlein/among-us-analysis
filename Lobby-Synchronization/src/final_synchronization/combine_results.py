@@ -27,7 +27,7 @@ for session in trustworthy_lobbies.keys():
             else:
                 ranking_dic[session][streamer] = 1
 
-# go through all sessions and all lobbies and choose lobby time from the preffered streamer
+# go through all sessions and all lobbies and choose lobby time from the preferred streamer
 for session in trustworthy_lobbies.keys():
     dic = trustworthy_lobbies[session]
     for lobby in dic.keys():
